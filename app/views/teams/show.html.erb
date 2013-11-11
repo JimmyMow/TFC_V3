@@ -1,0 +1,13 @@
+<h1><%= image_tag(@team.img_url) %> <%= @team.name %></h1>
+
+<h2>
+  <b>Coach:</b>
+  <%= @team.coach %>
+</h2>
+
+<ul>
+  <% @team.players.each do |player| %>
+    <li><%= player.name %> #<%= player.number %></li>
+  <% end %>
+</ul>
+

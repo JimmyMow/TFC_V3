@@ -1,0 +1,34 @@
+<h1>Comments</h1>
+
+<p><%= link_to 'Add a New Comment', new_comment_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Call</th>
+      <th>User</th>
+      <th>Challenge</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @comments.each do |comment| %>
+    <tr>
+      <td><%= comment.text %></td>
+      <td><%= comment.call_id %></td>
+      <td><%= comment.user_id %></td>
+      <td><%= comment.challenge_id %></td>
+  
+      <td><%= link_to 'Show', comment_url(comment) %></td>
+      <td><%= link_to 'Edit', edit_comment_url(comment) %></td>
+      <td><%= link_to 'Destroy', comment_url(comment), method: 'delete', data: { confirm: "Do you really want to delete this comment?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

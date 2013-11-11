@@ -1,0 +1,26 @@
+<h1>Editing Call Vote #<%= @call_vote.id %></h1>
+
+
+<%= form_tag(call_vote_url(@call_vote), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :user_id %><br />
+    <%= number_field_tag :user_id, @call_vote.user_id %>
+  </div>
+
+  <div>
+    <%= label_tag :call_id %><br />
+    <%= number_field_tag :call_id, @call_vote.call_id %>
+  </div>
+
+  <div>
+    <%= label_tag :vote %><br />
+    <%= check_box_tag :vote, @call_vote.vote? %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Call Vote" %>
+  </div>
+
+<% end %>

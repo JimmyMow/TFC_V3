@@ -1,0 +1,44 @@
+<h1>Challenges</h1>
+
+<p><%= link_to 'Add a New Challenge', new_challenge_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Call type</th>
+      <th>Quarter</th>
+      <th>Time</th>
+      <th>Game</th>
+      <th>Description</th>
+      <th>Commit player</th>
+      <th>Fouled player</th>
+      <th>Ref</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @challenges.each do |challenge| %>
+    <tr>
+      <td><%= challenge.call_type %></td>
+      <td><%= challenge.quarter %></td>
+      <td><%= challenge.time %></td>
+      <td><%= challenge.game_id %></td>
+      <td><%= challenge.description %></td>
+      <td><%= challenge.commit_player_id %></td>
+      <td><%= challenge.fouled_player_id %></td>
+      <td><%= challenge.ref_id %></td>
+      <td><%= challenge.user_id %></td>
+  
+      <td><%= link_to 'Show', challenge_url(challenge) %></td>
+      <td><%= link_to 'Edit', edit_challenge_url(challenge) %></td>
+      <td><%= link_to 'Destroy', challenge_url(challenge), method: 'delete', data: { confirm: "Do you really want to delete this challenge?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,44 @@
+<h1>Calls</h1>
+
+<p><%= link_to 'Add a New Call', new_call_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Call type</th>
+      <th>Quarter</th>
+      <th>Time</th>
+      <th>Game</th>
+      <th>Description</th>
+      <th>Commit player</th>
+      <th>Fouled player</th>
+      <th>Ref</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @calls.each do |call| %>
+    <tr>
+      <td><%= call.call_type %></td>
+      <td><%= call.quarter %></td>
+      <td><%= call.time %></td>
+      <td><%= call.game_id %></td>
+      <td><%= call.description %></td>
+      <td><%= call.commit_player_id %></td>
+      <td><%= call.fouled_player_id %></td>
+      <td><%= call.ref_id %></td>
+      <td><%= call.user_id %></td>
+  
+      <td><%= link_to 'Show', call_url(call) %></td>
+      <td><%= link_to 'Edit', edit_call_url(call) %></td>
+      <td><%= link_to 'Destroy', call_url(call), method: 'delete', data: { confirm: "Do you really want to delete this call?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

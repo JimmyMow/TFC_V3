@@ -1,0 +1,56 @@
+<h1>Editing Challenge #<%= @challenge.id %></h1>
+
+
+<%= form_tag(challenge_url(@challenge), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :call_type %><br />
+    <%= text_field_tag :call_type, @challenge.call_type %>
+  </div>
+
+  <div>
+    <%= label_tag :quarter %><br />
+    <%= text_field_tag :quarter, @challenge.quarter %>
+  </div>
+
+  <div>
+    <%= label_tag :time %><br />
+    <%= text_field_tag :time, @challenge.time %>
+  </div>
+
+  <div>
+    <%= label_tag :game_id %><br />
+    <%= number_field_tag :game_id, @challenge.game_id %>
+  </div>
+
+  <div>
+    <%= label_tag :description %><br />
+    <%= text_field_tag :description, @challenge.description %>
+  </div>
+
+  <div>
+    <%= label_tag :commit_player_id %><br />
+    <%= number_field_tag :commit_player_id, @challenge.commit_player_id %>
+  </div>
+
+  <div>
+    <%= label_tag :fouled_player_id %><br />
+    <%= number_field_tag :fouled_player_id, @challenge.fouled_player_id %>
+  </div>
+
+  <div>
+    <%= label_tag :ref_id %><br />
+    <%= number_field_tag :ref_id, @challenge.ref_id %>
+  </div>
+
+  <div>
+    <%= label_tag :user_id %><br />
+    <%= number_field_tag :user_id, @challenge.user_id %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Challenge" %>
+  </div>
+
+<% end %>

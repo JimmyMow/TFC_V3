@@ -1,0 +1,31 @@
+<h1>Editing Comment #<%= @comment.id %></h1>
+
+
+<%= form_tag(comment_url(@comment), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :text %><br />
+    <%= text_area_tag :text, @comment.text %>
+  </div>
+
+  <div>
+    <%= label_tag :call_id %><br />
+    <%= number_field_tag :call_id, @comment.call_id %>
+  </div>
+
+  <div>
+    <%= label_tag :user_id %><br />
+    <%= number_field_tag :user_id, @comment.user_id %>
+  </div>
+
+  <div>
+    <%= label_tag :challenge_id %><br />
+    <%= number_field_tag :challenge_id, @comment.challenge_id %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Comment" %>
+  </div>
+
+<% end %>

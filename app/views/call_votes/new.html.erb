@@ -1,0 +1,26 @@
+<h1>New Call Vote</h1>
+
+
+<%= form_tag(call_votes_url, method: 'post') do %>
+
+
+  <div>
+    <%= label_tag :user_id %><br />
+    <%= number_field_tag :user_id %>
+  </div>
+
+  <div>
+    <%= label_tag :call_id %><br />
+    <%= number_field_tag :call_id %>
+  </div>
+
+  <div>
+    <%= label_tag :vote %><br />
+    <%= check_box_tag :vote? %>
+  </div>
+
+
+  <div>
+    <%= submit_tag "Create Call Vote" %>
+  </div>
+<% end %>

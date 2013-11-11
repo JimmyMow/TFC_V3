@@ -1,0 +1,26 @@
+<h1>Editing Game #<%= @game.id %></h1>
+
+
+<%= form_tag(game_url(@game), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :home_team_id %><br />
+    <%= number_field_tag :home_team_id, @game.home_team_id %>
+  </div>
+
+  <div>
+    <%= label_tag :away_team_id %><br />
+    <%= number_field_tag :away_team_id, @game.away_team_id %>
+  </div>
+
+  <div>
+    <%= label_tag :time %><br />
+    <%= datetime_select_tag :time, @game.time %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Game" %>
+  </div>
+
+<% end %>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TFCV3</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <!-- BOOTSTRAP LINKS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <% if current_user.present? %>
+  <ul class="nav nav-tabs">
+    <!-- <li class="active"><a href="#">Home</a></li> -->
+    <li><%= link_to 'Home', games_url %></li>
+    <li><%= link_to 'Players', players_url %></li>
+    <li><%= link_to 'Teams', teams_url %></li>
+  </ul>
+
+  <% end %>
+<%= yield %>
+
+</body>
+</html>

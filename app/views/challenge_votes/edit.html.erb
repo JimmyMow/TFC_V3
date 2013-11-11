@@ -1,0 +1,26 @@
+<h1>Editing Challenge Vote #<%= @challenge_vote.id %></h1>
+
+
+<%= form_tag(challenge_vote_url(@challenge_vote), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :user_id %><br />
+    <%= number_field_tag :user_id, @challenge_vote.user_id %>
+  </div>
+
+  <div>
+    <%= label_tag :challenge_id %><br />
+    <%= number_field_tag :challenge_id, @challenge_vote.challenge_id %>
+  </div>
+
+  <div>
+    <%= label_tag :vote %><br />
+    <%= check_box_tag :vote, @challenge_vote.vote? %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Challenge Vote" %>
+  </div>
+
+<% end %>

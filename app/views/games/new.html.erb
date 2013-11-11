@@ -1,0 +1,26 @@
+<h1>New Game</h1>
+
+
+<%= form_tag(games_url, method: 'post') do %>
+
+
+  <div>
+    <%= label_tag :home_team_id %><br />
+    <%= number_field_tag :home_team_id %>
+  </div>
+
+  <div>
+    <%= label_tag :away_team_id %><br />
+    <%= number_field_tag :away_team_id %>
+  </div>
+
+  <div>
+    <%= label_tag :time %><br />
+    <%= datetime_select_tag :time %>
+  </div>
+
+
+  <div>
+    <%= submit_tag "Create Game" %>
+  </div>
+<% end %>

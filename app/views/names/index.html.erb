@@ -1,0 +1,28 @@
+<h1>Names</h1>
+
+<p><%= link_to 'Add a New Name', new_name_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Img url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @names.each do |name| %>
+    <tr>
+      <td><%= name.img_url %></td>
+  
+      <td><%= link_to 'Show', name_url(name) %></td>
+      <td><%= link_to 'Edit', edit_name_url(name) %></td>
+      <td><%= link_to 'Destroy', name_url(name), method: 'delete', data: { confirm: "Do you really want to delete this name?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

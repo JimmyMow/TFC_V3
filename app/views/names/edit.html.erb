@@ -1,0 +1,16 @@
+<h1>Editing Name #<%= @name.id %></h1>
+
+
+<%= form_tag(name_url(@name), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :img_url %><br />
+    <%= text_field_tag :img_url, @name.img_url %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Name" %>
+  </div>
+
+<% end %>

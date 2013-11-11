@@ -1,0 +1,21 @@
+<h1>Editing Ref #<%= @ref.id %></h1>
+
+
+<%= form_tag(ref_url(@ref), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :name %><br />
+    <%= text_field_tag :name, @ref.name %>
+  </div>
+
+  <div>
+    <%= label_tag :img_url %><br />
+    <%= text_field_tag :img_url, @ref.img_url %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Ref" %>
+  </div>
+
+<% end %>

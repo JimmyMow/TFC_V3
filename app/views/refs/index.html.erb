@@ -1,0 +1,30 @@
+<h1>Refs</h1>
+
+<p><%= link_to 'Add a New Ref', new_ref_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Img url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @refs.each do |ref| %>
+    <tr>
+      <td><%= ref.name %></td>
+      <td><%= ref.img_url %></td>
+  
+      <td><%= link_to 'Show', ref_url(ref) %></td>
+      <td><%= link_to 'Edit', edit_ref_url(ref) %></td>
+      <td><%= link_to 'Destroy', ref_url(ref), method: 'delete', data: { confirm: "Do you really want to delete this ref?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

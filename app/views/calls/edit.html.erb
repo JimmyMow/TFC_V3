@@ -1,0 +1,56 @@
+<h1>Editing Call #<%= @call.id %></h1>
+
+
+<%= form_tag(call_url(@call), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :call_type %><br />
+    <%= text_field_tag :call_type, @call.call_type %>
+  </div>
+
+  <div>
+    <%= label_tag :quarter %><br />
+    <%= text_field_tag :quarter, @call.quarter %>
+  </div>
+
+  <div>
+    <%= label_tag :time %><br />
+    <%= text_field_tag :time, @call.time %>
+  </div>
+
+  <div>
+    <%= label_tag :game_id %><br />
+    <%= number_field_tag :game_id, @call.game_id %>
+  </div>
+
+  <div>
+    <%= label_tag :description %><br />
+    <%= text_field_tag :description, @call.description %>
+  </div>
+
+  <div>
+    <%= label_tag :commit_player_id %><br />
+    <%= number_field_tag :commit_player_id, @call.commit_player_id %>
+  </div>
+
+  <div>
+    <%= label_tag :fouled_player_id %><br />
+    <%= number_field_tag :fouled_player_id, @call.fouled_player_id %>
+  </div>
+
+  <div>
+    <%= label_tag :ref_id %><br />
+    <%= number_field_tag :ref_id, @call.ref_id %>
+  </div>
+
+  <div>
+    <%= label_tag :user_id %><br />
+    <%= number_field_tag :user_id, @call.user_id %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Call" %>
+  </div>
+
+<% end %>

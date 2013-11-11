@@ -1,0 +1,32 @@
+<h1>Call votes</h1>
+
+<p><%= link_to 'Add a New Call Vote', new_call_vote_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Call</th>
+      <th>Vote</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @call_votes.each do |call_vote| %>
+    <tr>
+      <td><%= call_vote.user_id %></td>
+      <td><%= call_vote.call_id %></td>
+      <td><%= call_vote.vote %></td>
+  
+      <td><%= link_to 'Show', call_vote_url(call_vote) %></td>
+      <td><%= link_to 'Edit', edit_call_vote_url(call_vote) %></td>
+      <td><%= link_to 'Destroy', call_vote_url(call_vote), method: 'delete', data: { confirm: "Do you really want to delete this call_vote?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

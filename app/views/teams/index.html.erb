@@ -1,0 +1,32 @@
+<h1>Teams</h1>
+
+<p><%= link_to 'Add a New Team', new_team_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Coach</th>
+      <th>Name</th>
+      <th>Img url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @teams.each do |team| %>
+    <tr>
+      <td><%= team.coach %></td>
+      <td><%= team.name %></td>
+      <td><%= image_tag(team.img_url) %></td>
+
+      <td><%= link_to 'Show', team_url(team) %></td>
+      <td><%= link_to 'Edit', edit_team_url(team) %></td>
+      <td><%= link_to 'Destroy', team_url(team), method: 'delete', data: { confirm: "Do you really want to delete this team?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
