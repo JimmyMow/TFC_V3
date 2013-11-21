@@ -1,0 +1,30 @@
+<h1>Game refs</h1>
+
+<p><%= link_to 'Add a New Game Ref', new_game_ref_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Ref</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @game_refs.each do |game_ref| %>
+    <tr>
+      <td><%= game_ref.game_id %></td>
+      <td><%= game_ref.ref_id %></td>
+  
+      <td><%= link_to 'Show', game_ref_url(game_ref) %></td>
+      <td><%= link_to 'Edit', edit_game_ref_url(game_ref) %></td>
+      <td><%= link_to 'Destroy', game_ref_url(game_ref), method: 'delete', data: { confirm: "Do you really want to delete this game_ref?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

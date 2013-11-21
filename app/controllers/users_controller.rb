@@ -33,16 +33,16 @@ class UsersController < ApplicationController
     @user = User.find_by(:id => params[:id])
     @user.first_name = params[:first_name]
     @user.last_name = params[:last_name]
-    @user.user_name = params[:user_name]
+    @user.username = params[:username]
     @user.email = params[:email]
     @user.iq = params[:iq]
     @user.password_digest = params[:password_digest]
     @user.description = params[:description]
 
     if @user.save
-      redirect_to users_url
+      redirect_to user_url(params[:id])
     else
-      render 'new'
+      redirect_to edit_user_url(params[:id])
     end
   end
 

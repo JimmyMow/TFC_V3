@@ -1,0 +1,6 @@
+<span id="comment-score-<%= comment.id %>">
+  <% if comment.challenge_comment_votes.count > 0 %>
+  +
+  <% end %>
+  <%= comment.challenge_comment_votes.count %>
+</span>

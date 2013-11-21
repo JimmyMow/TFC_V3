@@ -1,0 +1,36 @@
+<%= form_for(@user) do |f| %>
+    <div>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </div>
+
+  <div>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+
+  <div>
+    <%= f.hidden_field :password %>
+    <%= f.hidden_field :password_confirmation %>
+
+  </div>
+
+  <div>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -9,22 +9,23 @@ class ChallengesController < ApplicationController
   end
 
   def new
+    @challenge = Challenge.new
   end
 
   def create
     @challenge = Challenge.new
-    @challenge.call_type = params[:call_type]
-    @challenge.quarter = params[:quarter]
-    @challenge.time = params[:time]
-    @challenge.game_id = params[:game_id]
-    @challenge.description = params[:description]
-    @challenge.commit_player_id = params[:commit_player_id]
-    @challenge.fouled_player_id = params[:fouled_player_id]
-    @challenge.ref_id = params[:ref_id]
-    @challenge.user_id = params[:user_id]
-    
+    @challenge.call_type = params[:challenge][:call_type]
+    @challenge.quarter = params[:challenge][:quarter]
+    @challenge.time = params[:challenge][:time]
+    @challenge.game_id = params[:challenge][:game_id]
+    @challenge.description = params[:challenge][:description]
+    @challenge.commit_player_id = params[:challenge][:commit_player_id]
+    @challenge.fouled_player_id = params[:challenge][:fouled_player_id]
+    @challenge.ref_id = params[:challenge][:ref_id]
+    @challenge.user_id = params[:challenge][:user_id]
+
     if @challenge.save
-      redirect_to challenges_url
+      redirect_to game_url(params[:challenge][:game_id])
     else
       render 'new'
     end
@@ -45,7 +46,7 @@ class ChallengesController < ApplicationController
     @challenge.fouled_player_id = params[:fouled_player_id]
     @challenge.ref_id = params[:ref_id]
     @challenge.user_id = params[:user_id]
-    
+
     if @challenge.save
       redirect_to challenges_url
     else

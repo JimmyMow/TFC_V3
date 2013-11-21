@@ -1,0 +1,21 @@
+<h1>New Game Ref</h1>
+
+
+<%= form_tag(game_refs_url, method: 'post') do %>
+
+
+  <div>
+    <%= label_tag :game_id %><br />
+    <%= number_field_tag :game_id %>
+  </div>
+
+  <div>
+    <%= label_tag :ref_id %><br />
+    <%= number_field_tag :ref_id %>
+  </div>
+
+
+  <div>
+    <%= submit_tag "Create Game Ref" %>
+  </div>
+<% end %>

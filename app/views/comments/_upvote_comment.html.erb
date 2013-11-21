@@ -1,0 +1,1 @@
+<%= link_to "<i class=\"fa fa-thumbs-up agree\"></i>".html_safe, comment_votes_url(user_id: current_user.id, comment_id: comment.id, game_id: comment.call.game_id, vote: true), method: 'post', remote: true %>

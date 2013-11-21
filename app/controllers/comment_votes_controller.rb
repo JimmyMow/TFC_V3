@@ -16,11 +16,15 @@ class CommentVotesController < ApplicationController
     @comment_vote.user_id = params[:user_id]
     @comment_vote.comment_id = params[:comment_id]
     @comment_vote.vote = params[:vote]
-    
-    if @comment_vote.save
-      redirect_to comment_votes_url
-    else
-      render 'new'
+
+    respond_to do |format|
+      if @comment_vote.save
+        #CallVote.where(:user_id => params[:user_id], :call_id => params[:call_id], :comment_id => params[:comment_id]).destroy
+        format.js
+        format.html { redirect_to game_url(params[:game_id]) }
+      else
+        render 'new'
+      end
     end
   end
 
@@ -33,7 +37,7 @@ class CommentVotesController < ApplicationController
     @comment_vote.user_id = params[:user_id]
     @comment_vote.comment_id = params[:comment_id]
     @comment_vote.vote = params[:vote]
-    
+
     if @comment_vote.save
       redirect_to comment_votes_url
     else

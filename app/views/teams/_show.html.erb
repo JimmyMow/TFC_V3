@@ -1,0 +1,27 @@
+<h1><%= image_tag(team.img_url) %> <%= team.name %></h1>
+
+<h2>
+  <b>Coach:</b>
+  <%= team.coach %>
+</h2>
+
+<div class="container">
+  <table class="table table">
+    <thead>
+      <tr>
+
+      </tr>
+    </thead>
+    <tbody>
+     <% team.players.order('name').each do |player| %>
+     <tr>
+        <td>#<%= player.number %></td>
+        <td><%= player.name %></td>
+        <td><%= link_to '', player_url(player.id), :class => "btn btn-primary   fa fa-arrow-circle-right" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+

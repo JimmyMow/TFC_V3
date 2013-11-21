@@ -5,18 +5,28 @@
 
 
   <div>
-    <%= label_tag :home_team_id %><br />
-    <%= number_field_tag :home_team_id %>
+    <%= select_tag 'home_team_id', options_from_collection_for_select(@teams, "id", "name") %>
   </div>
 
   <div>
-    <%= label_tag :away_team_id %><br />
-    <%= number_field_tag :away_team_id %>
+    <%= select_tag 'away_team_id', options_from_collection_for_select(@teams, "id", "name") %>
+  </div>
+
+  <div>
+    <%= select_tag 'ref_one_id', options_from_collection_for_select(@refs, "id", "name") %>
+  </div>
+
+  <div>
+    <%= select_tag 'ref_two_id', options_from_collection_for_select(@refs, "id", "name") %>
+  </div>
+
+  <div>
+    <%= select_tag 'ref_three_id', options_from_collection_for_select(@refs, "id", "name") %>
   </div>
 
   <div>
     <%= label_tag :time %><br />
-    <%= datetime_select_tag :time %>
+    <%= datetime_field :game, :time %>
   </div>
 
 

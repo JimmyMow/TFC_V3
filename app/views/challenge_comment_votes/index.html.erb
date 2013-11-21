@@ -1,0 +1,32 @@
+<h1>Challenge comment votes</h1>
+
+<p><%= link_to 'Add a New Challenge Comment Vote', new_challenge_comment_vote_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Challenge comment</th>
+      <th>Vote</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @challenge_comment_votes.each do |challenge_comment_vote| %>
+    <tr>
+      <td><%= challenge_comment_vote.user_id %></td>
+      <td><%= challenge_comment_vote.challenge_comment_id %></td>
+      <td><%= challenge_comment_vote.vote %></td>
+  
+      <td><%= link_to 'Show', challenge_comment_vote_url(challenge_comment_vote) %></td>
+      <td><%= link_to 'Edit', edit_challenge_comment_vote_url(challenge_comment_vote) %></td>
+      <td><%= link_to 'Destroy', challenge_comment_vote_url(challenge_comment_vote), method: 'delete', data: { confirm: "Do you really want to delete this challenge_comment_vote?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,3 @@
+$('.comment-material-<%= @comment_vote.comment.id %>').replaceWith('<%= j(render 'comment_votes/vote_counter', comment: @comment_vote.comment) %>');
+$('.like-comment-<%= @comment_vote.comment_id %>').replaceWith('<%= j(render 'comments/upvote_comment', comment: @comment_vote.comment) %>');
+

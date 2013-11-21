@@ -19,9 +19,11 @@
     <%= text_field_tag :time %>
   </div>
 
+ <%= hidden_field_tag 'game_id', @game.id %>
+
   <div>
-    <%= label_tag :game_id %><br />
-    <%= number_field_tag :game_id %>
+    <%= label_tag :fouled_player_id %><br />
+    <%= select_tag 'fouled_player_id',  options_from_collection_for_select(@players, "id", "name") %>
   </div>
 
   <div>
@@ -31,26 +33,16 @@
 
   <div>
     <%= label_tag :commit_player_id %><br />
-    <%= number_field_tag :commit_player_id %>
-  </div>
-
-  <div>
-    <%= label_tag :fouled_player_id %><br />
-    <%= number_field_tag :fouled_player_id %>
+    <%= select_tag 'commit_player_id',  options_from_collection_for_select(@players, "id", "name") %>
   </div>
 
   <div>
     <%= label_tag :ref_id %><br />
-    <%= number_field_tag :ref_id %>
-  </div>
-
-  <div>
-    <%= label_tag :user_id %><br />
-    <%= number_field_tag :user_id %>
+    <%= select_tag 'ref_id',  options_from_collection_for_select(@game.refs, "id", "name") %>
   </div>
 
 
   <div>
-    <%= submit_tag "Create Call" %>
+    <%= submit_tag "Create Call", :class => 'btn btn-danger' %>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-<h1>User #<%= @user.id %></h1>
+<h1><%= @user.username %></h1>
 
 <p>
   <b>First name:</b>
@@ -12,7 +12,7 @@
 
 <p>
   <b>User name:</b>
-  <%= @user.user_name %>
+  <%= @user.username %>
 </p>
 
 <p>
@@ -26,13 +26,8 @@
 </p>
 
 <p>
-  <b>Password digest:</b>
-  <%= @user.password_digest %>
-</p>
-
-<p>
   <b>Description:</b>
   <%= @user.description %>
 </p>
 
-
+<%= link_to 'Edit Profile', edit_user_url %>

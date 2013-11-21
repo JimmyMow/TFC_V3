@@ -1,0 +1,3 @@
+// In here we write JS for any subscribed browsers to execute
+$(".comment-material:first").prepend('<%= j(render 'comment', :comment => @comment) %>');
+$("input#comment_text").val("");

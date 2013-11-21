@@ -1,0 +1,36 @@
+<style type="text/css">
+.comments {
+    background-color: #DDE1E6;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .comment {
+    margin-left: 10px;
+    border-bottom: solid 1px gray;
+  }
+
+  .comment-material {
+    color: black;
+    margin-top: 5px;
+  }
+</style>
+
+<div class='comment'>
+  <p class='comment-material'>
+    <%= link_to comment.user.username, user_url(comment.user.id) %>
+    <%= comment.text %>
+    <p>
+      <% comment_ids = current_user.challenge_comment_votes.collect { |c| c.challenge_comment_id } %>
+      <% if comment_ids.include?(comment.id) %>
+        <%= render 'challenge_comments/upvote_comment', comment: comment %>
+      <% else %>
+        <%= link_to "<i class=\"fa fa-thumbs-o-up agree\"></i>".html_safe, challenge_comment_votes_url(user_id: current_user.id, challenge_comment_id: comment.id, game_id: comment.challenge.game_id, vote: true), method: 'post', remote: true, :class => "like-comment-#{comment.id}" %>
+      <% end %>
+
+      <%= render 'challenge_comment_votes/vote_counter', comment: comment %>
+
+      <%= time_ago_in_words(comment.created_at) %> ago
+    </p>
+  </p>
+</div>

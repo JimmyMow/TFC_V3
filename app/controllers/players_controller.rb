@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
 
   def index
-    @players = Player.all
+    @players = Player.all.page(params[:page]).per(15)
   end
 
   def show
@@ -17,7 +17,7 @@ class PlayersController < ApplicationController
     @player.number = params[:number]
     @player.img_url = params[:img_url]
     @player.team_id = params[:team_id]
-    
+
     if @player.save
       redirect_to players_url
     else
@@ -35,7 +35,7 @@ class PlayersController < ApplicationController
     @player.number = params[:number]
     @player.img_url = params[:img_url]
     @player.team_id = params[:team_id]
-    
+
     if @player.save
       redirect_to players_url
     else

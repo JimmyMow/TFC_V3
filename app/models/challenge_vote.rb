@@ -1,2 +1,5 @@
-class ChallengeVote < ActiveRecord::Base
+  class ChallengeVote < ActiveRecord::Base
+  belongs_to :challenge
+  belongs_to :user
+
 end

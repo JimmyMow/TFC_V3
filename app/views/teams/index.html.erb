@@ -1,32 +1,50 @@
-<h1>Teams</h1>
+<style type="text/css">
+    body {
+    background: url(http://www.userlogos.org/files/backgrounds/mafi0z/1280x%20-Slate%20Gradient.jpg);
 
-<p><%= link_to 'Add a New Team', new_team_url %></p>
+    color: white;
+  }
 
-<table>
-  <thead>
-    <tr>
-      <th>Coach</th>
-      <th>Name</th>
-      <th>Img url</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  h1 {
+    text-align: center;
+  }
 
-  <tbody>
+  h2 {
+    text-align: center;
+  }
+
+  .ribbon {
+  background: #DDE1E6;
+  height: 100%;
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  }
+
+  .logo-container {
+  display: inline-block;
+  padding: 5px;
+  height: 50px;
+  width: 50px;
+  }
+
+
+  .btn-default .Atlanta {
+    color: red;
+    background-color: red;
+    border-color: red;
+  }
+
+</style>
+
+<h1>NBA Teams</h1>
+
+<div class='ribbon'>
   <% @teams.each do |team| %>
-    <tr>
-      <td><%= team.coach %></td>
-      <td><%= team.name %></td>
-      <td><%= image_tag(team.img_url) %></td>
-
-      <td><%= link_to 'Show', team_url(team) %></td>
-      <td><%= link_to 'Edit', edit_team_url(team) %></td>
-      <td><%= link_to 'Destroy', team_url(team), method: 'delete', data: { confirm: "Do you really want to delete this team?" } %></td>
-
-    </tr>
+    <%= link_to image_tag(team.img_url, :class => 'logo-container'), team_url(team.id, team_id: team.id) %>
   <% end %>
-  </tbody>
-</table>
-
+</div>
+<% if @specific_team.present? %>
+<%= render 'show', team: @specific_team %>
+<% end %>

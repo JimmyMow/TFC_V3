@@ -1,0 +1,36 @@
+<style type="text/css">
+  h1 {
+    text-align: center;
+  }
+
+  .center {
+    text-align: center;
+  }
+</style>
+
+<script>
+  $('#alert').alert();
+</script>
+
+<% if notice.present? %>
+  <div class="container center">
+    <div class="col-lg-6 center">
+      <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><%= notice %></h4>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<h1>Welcome, <%= current_user.username %></h1>
+
+<div class='container'>
+  <div class='col-lg-12'>
+    <div class='col-lg-6'>
+  <button type="button" class="btn btn-danger btn-lg btn-block fa fa-pencil-square-o"> STATS</button>
+  <button type="button" class="btn btn-danger btn-lg btn-block fa fa-pencil-square-o"> GAMES</button>
+
+    </div>
+  </div>
+</div>

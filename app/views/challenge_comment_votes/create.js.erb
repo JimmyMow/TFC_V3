@@ -1,0 +1,2 @@
+$('.like-comment-<%= @challenge_comment_vote.challenge_comment_id %>').replaceWith('<%= j(render 'challenge_comments/upvote_comment', comment: @challenge_comment_vote.challenge_comment) %>');
+$('#comment-score-<%= @challenge_comment_vote.challenge_comment_id %>').replaceWith('<%= j(render 'challenge_comment_votes/vote_counter', comment: @challenge_comment_vote.challenge_comment ) %>')

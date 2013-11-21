@@ -1,0 +1,2 @@
+$('.like-challenge-<%= @challenge_vote.challenge_id %>').replaceWith('<%= j(render 'games/upvote_challenge', challenge: @challenge_vote.challenge) %>');
+$('#score-<%= @challenge_vote.challenge.id %>').replaceWith('<%= j(render 'challenge_votes/vote_counter', challenge: @challenge_vote.challenge) %>');

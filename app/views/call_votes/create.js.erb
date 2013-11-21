@@ -1,0 +1,6 @@
+$('#score-<%= @call_vote.call_id %>').replaceWith('<%= j(render 'call_votes/vote_counter', call: @call_vote.call) %>');
+<% if @call_vote.vote == true %>
+  $('#call-agree-<%= @call_vote.call_id %>').replaceWith('<%= j(render 'games/upvote_call', call: @call_vote.call) %>');
+<% elsif @call_vote.vote == false %>
+  $('#call-disagree-<%= @call_vote.call_id %>').replaceWith('<%= j(render 'games/downvote_call', call: @call_vote.call) %>');
+<% end %>

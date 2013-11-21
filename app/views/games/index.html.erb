@@ -1,5 +1,5 @@
 <h1>Games</h1>
-
+<%= notice %>
 <p><%= link_to 'Add a New Game', new_game_url %></p>
 
 <table>
@@ -17,8 +17,8 @@
   <tbody>
   <% @games.each do |game| %>
     <tr>
-      <td><%= game.home_team_id %></td>
-      <td><%= game.away_team_id %></td>
+      <td><%= game.home_team.name %></td>
+      <td><%= game.away_team.name %></td>
       <td><%= game.time %></td>
 
       <td><%= link_to 'Show', game_url(game) %></td>

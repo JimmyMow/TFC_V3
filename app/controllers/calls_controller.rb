@@ -9,6 +9,8 @@ class CallsController < ApplicationController
   end
 
   def new
+    @game = Game.find_by_id(params[:game_id])
+    @players =  @game.home_team.players + @game.away_team.players
   end
 
   def create
@@ -21,10 +23,10 @@ class CallsController < ApplicationController
     @call.commit_player_id = params[:commit_player_id]
     @call.fouled_player_id = params[:fouled_player_id]
     @call.ref_id = params[:ref_id]
-    @call.user_id = params[:user_id]
-    
+
+
     if @call.save
-      redirect_to calls_url
+      redirect_to game_url(params[:game_id])
     else
       render 'new'
     end
@@ -45,7 +47,7 @@ class CallsController < ApplicationController
     @call.fouled_player_id = params[:fouled_player_id]
     @call.ref_id = params[:ref_id]
     @call.user_id = params[:user_id]
-    
+
     if @call.save
       redirect_to calls_url
     else

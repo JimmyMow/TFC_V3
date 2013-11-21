@@ -1,4 +1,55 @@
 TFCV3::Application.routes.draw do
+  # Routes for the Challenge_comment_vote resource:
+  # CREATE
+  get '/challenge_comment_votes/new', controller: 'challenge_comment_votes', action: 'new', :as => 'new_challenge_comment_vote'
+  post '/challenge_comment_votes', controller: 'challenge_comment_votes', action: 'create'
+
+  # READ
+  get '/challenge_comment_votes', controller: 'challenge_comment_votes', action: 'index'
+  get '/challenge_comment_votes/:id', controller: 'challenge_comment_votes', action: 'show', :as => 'challenge_comment_vote'
+
+  # UPDATE
+  get '/challenge_comment_votes/:id/edit', controller: 'challenge_comment_votes', action: 'edit', :as => 'edit_challenge_comment_vote'
+  patch '/challenge_comment_votes/:id', controller: 'challenge_comment_votes', action: 'update'
+
+  # DELETE
+  delete '/challenge_comment_votes/:id', controller: 'challenge_comment_votes', action: 'destroy'
+  #------------------------------
+
+  # Routes for the Challenge_comment resource:
+  # CREATE
+  get '/challenge_comments/new', controller: 'challenge_comments', action: 'new', :as => 'new_challenge_comment'
+  post '/challenge_comments', controller: 'challenge_comments', action: 'create'
+
+  # READ
+  get '/challenge_comments', controller: 'challenge_comments', action: 'index'
+  get '/challenge_comments/:id', controller: 'challenge_comments', action: 'show', :as => 'challenge_comment'
+
+  # UPDATE
+  get '/challenge_comments/:id/edit', controller: 'challenge_comments', action: 'edit', :as => 'edit_challenge_comment'
+  patch '/challenge_comments/:id', controller: 'challenge_comments', action: 'update'
+
+  # DELETE
+  delete '/challenge_comments/:id', controller: 'challenge_comments', action: 'destroy'
+  #------------------------------
+
+  # Routes for the Game_ref resource:
+  # CREATE
+  get '/game_refs/new', controller: 'game_refs', action: 'new', :as => 'new_game_ref'
+  post '/game_refs', controller: 'game_refs', action: 'create'
+
+  # READ
+  get '/game_refs', controller: 'game_refs', action: 'index'
+  get '/game_refs/:id', controller: 'game_refs', action: 'show', :as => 'game_ref'
+
+  # UPDATE
+  get '/game_refs/:id/edit', controller: 'game_refs', action: 'edit', :as => 'edit_game_ref'
+  patch '/game_refs/:id', controller: 'game_refs', action: 'update'
+
+  # DELETE
+  delete '/game_refs/:id', controller: 'game_refs', action: 'destroy'
+  #------------------------------
+
   # SESSIONS
   root to: 'sessions#new'
 
@@ -7,6 +58,9 @@ TFCV3::Application.routes.draw do
   post '/sessions' => 'sessions#create', as: 'session'
 
   delete '/sessions' => 'sessions#destroy'
+  # Random Pages
+  get '/home' => 'pages#home', as: 'home'
+  get '/stats' => 'pages#stats', as: 'stats'
   # Routes for the Comment_vote resource:
   # CREATE
   get '/comment_votes/new', controller: 'comment_votes', action: 'new', :as => 'new_comment_vote'
@@ -192,23 +246,6 @@ TFCV3::Application.routes.draw do
 
   # DELETE
   delete '/refs/:id', controller: 'refs', action: 'destroy'
-  #------------------------------
-
-  # Routes for the Name resource:
-  # CREATE
-  get '/names/new', controller: 'names', action: 'new', :as => 'new_name'
-  post '/names', controller: 'names', action: 'create'
-
-  # READ
-  get '/names', controller: 'names', action: 'index'
-  get '/names/:id', controller: 'names', action: 'show', :as => 'name'
-
-  # UPDATE
-  get '/names/:id/edit', controller: 'names', action: 'edit', :as => 'edit_name'
-  patch '/names/:id', controller: 'names', action: 'update'
-
-  # DELETE
-  delete '/names/:id', controller: 'names', action: 'destroy'
   #------------------------------
 
   # The priority is based upon order of creation: first created -> highest priority.

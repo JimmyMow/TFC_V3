@@ -1,0 +1,21 @@
+<h1>Editing Game Ref #<%= @game_ref.id %></h1>
+
+
+<%= form_tag(game_ref_url(@game_ref), method: 'patch') do %>
+
+  <div>
+    <%= label_tag :game_id %><br />
+    <%= number_field_tag :game_id, @game_ref.game_id %>
+  </div>
+
+  <div>
+    <%= label_tag :ref_id %><br />
+    <%= number_field_tag :ref_id, @game_ref.ref_id %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Game Ref" %>
+  </div>
+
+<% end %>
