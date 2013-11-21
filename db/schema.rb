@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118225303) do
+ActiveRecord::Schema.define(version: 20131121153704) do
 
   create_table "call_votes", force: true do |t|
     t.integer  "user_id"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20131118225303) do
     t.string   "img_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "large_img_url"
   end
 
   create_table "users", force: true do |t|

@@ -1,13 +1,9 @@
 <style type="text/css">
-  h1 {
-    text-align: center;
-  }
-
-  .home_team {
+  .away_team {
     text-align: right;
   }
 
-  .away_team {
+  .home_team {
     text-align: left;
   }
 
@@ -61,14 +57,14 @@
 
 <div class="container opponents">
   <div class="row">
-    <div class="col-md-5 home_team">
+    <div class="col-md-5">
   <%= image_tag(@game.home_team.img_url) %>
   <%= link_to @game.home_team.name, team_url(team_id: @game.home_team.id) %>
     </div>
     <div class="col-md-2 vs">
    vs.
     </div>
-    <div class="col-md-5 away_team">
+    <div class="col-md-5">
    <%= image_tag(@game.away_team.img_url) %>
    <%= link_to @game.away_team.name, team_url(team_id: @game.away_team.id) %>
     </div>
@@ -86,58 +82,56 @@
 
 <!-- CALLS -->
 <div class='container'>
-  <div class='col-lg-12 challenge-form'>
-      <p><%= paginate @calls %></p>
-        <% @game.calls.each do |call| %>
-          <div class='call'>
-            <%= call.description %>
+        <% @game.calls.reverse.each do |call| %>
+          <div class='row'>
+            <!-- <div class="col-lg-12"> -->
+              <div class='col-md-12 away_team'>
+                <h3><%= call.description %></h3>
 
-            <% if current_user.calls.include?(call) %>
-              <%= render 'downvote_call', call: call %>
-            <% else %>
-              <%= link_to "<i class=\"fa fa-thumbs-o-down fa-lg disagree\"></i>".html_safe, call_votes_url(user_id: current_user.id, call_id: call.id, vote: false, format: :js), remote: true, method: 'post', :id => "call-disagree-#{call.id}" %>
-            <% end %>
+                <% if current_user.calls.include?(call) %>
+                  <%= render 'downvote_call', call: call %>
+                <% else %>
+                  <%= link_to "Disagree", call_votes_url(user_id: current_user.id, call_id: call.id, vote: false, format: :js), remote: true, method: 'post', :id => "call-disagree-#{call.id}" %>
+                <% end %>
+                <%= render 'call_votes/vote_counter', call: call %>
+                <%= link_to pluralize(call.comments.count, 'Comment'), "#", :class => 'show_comments' %>
+                <div class='comments'>
+                  <%= render 'comments/form', call: call %>
+                  <% call.comments.reverse.each do |comment| %>
+                      <%= render 'comments/comment', comment: comment %>
+                  <% end %><!-- COMMENTS END -->
+                </div><!-- COMMENTS -->
 
-
-            <%= render 'call_votes/vote_counter', call: call %>
-
-            <%= link_to pluralize(call.comments.count, 'Comment'), "#", :class => 'show_comments' %>
-
-            <div class='comments'>
-              <%= render 'comments/form', call: call %>
-
-              <% call.comments.reverse.each do |comment| %>
-                  <%= render 'comments/comment', comment: comment %>
-              <% end %><!-- COMMENTS END -->
-            </div><!-- COMMENTS -->
-          </div><!-- CALL -->
+              </div><!-- COL-MD-12 -->
+          </div><!-- ROW -->
         <% end %><!-- CALLS END -->
 
       <% @game.challenges.reverse.each do |challenge| %>
-          <div class='challenges'>
-          <%= challenge.description %>
+          <div class='row'>
+            <div class="col-md-12 opponents">
+            <h3><%= challenge.description %></h3>
 
-        <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
-        <% if challenge_ids.include?(challenge.id) %>
-          <%= render 'upvote_challenge', challenge: challenge %>
-        <% else %>
-          <%= link_to "<i class=\"fa fa-thumbs-o-up fa-lg agree\"></i>".html_safe, challenge_votes_url(user_id: current_user.id, challenge_id: challenge.id, game_id: challenge.game_id, vote: true), method: 'post', remote: true, :class => "like-challenge-#{challenge.id}" %>
-        <% end %>
-
-        <%= render 'challenge_votes/vote_counter', challenge: challenge %>
-
-        <%= link_to pluralize(challenge.challenge_comments.count, 'Comment'), "#", :class => 'show_comments' %>
-
-        <div class='comments'>
-          <%= render 'challenge_comments/form', challenge: challenge %>
-
-          <% challenge.challenge_comments.reverse.each do |comment| %>
-            <%= render 'challenge_comments/comment', comment: comment %>
+          <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
+          <% if challenge_ids.include?(challenge.id) %>
+            <%= render 'upvote_challenge', challenge: challenge %>
+          <% else %>
+            <%= link_to "Agree", challenge_votes_url(user_id: current_user.id, challenge_id: challenge.id, game_id: challenge.game_id, vote: true), method: 'post', remote: true, :class => "like-challenge-#{challenge.id}" %>
           <% end %>
-        </div><!-- COMMENTS -->
-      </div><!-- CHALLENGES -->
+
+          <%= render 'challenge_votes/vote_counter', challenge: challenge %>
+
+          <%= link_to pluralize(challenge.challenge_comments.count, 'Comment'), "#", :class => 'show_comments' %>
+
+          <div class='comments'>
+            <%= render 'challenge_comments/form', challenge: challenge %>
+
+            <% challenge.challenge_comments.reverse.each do |comment| %>
+              <%= render 'challenge_comments/comment', comment: comment %>
+            <% end %>
+          </div><!-- COMMENTS -->
+        </div>
+      </div><!-- ROW -->
       <% end %>
-  </div><!-- COL-LG-12 -->
 </div><!-- CONTAINER -->
 
 
