@@ -1,1 +1,0 @@
-<%= link_to "<i class=\"fa fa-flag disagree\"></i>".html_safe, call_votes_url(user_id: current_user.id, call_id: call.id, vote: false), remote: true, method: 'post', :id => "call-disagree-#{call.id}" %>

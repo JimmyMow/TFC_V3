@@ -1,36 +1,4 @@
 TFCV3::Application.routes.draw do
-  # Routes for the Challenge_comment_vote resource:
-  # CREATE
-  get '/challenge_comment_votes/new', controller: 'challenge_comment_votes', action: 'new', :as => 'new_challenge_comment_vote'
-  post '/challenge_comment_votes', controller: 'challenge_comment_votes', action: 'create'
-
-  # READ
-  get '/challenge_comment_votes', controller: 'challenge_comment_votes', action: 'index'
-  get '/challenge_comment_votes/:id', controller: 'challenge_comment_votes', action: 'show', :as => 'challenge_comment_vote'
-
-  # UPDATE
-  get '/challenge_comment_votes/:id/edit', controller: 'challenge_comment_votes', action: 'edit', :as => 'edit_challenge_comment_vote'
-  patch '/challenge_comment_votes/:id', controller: 'challenge_comment_votes', action: 'update'
-
-  # DELETE
-  delete '/challenge_comment_votes/:id', controller: 'challenge_comment_votes', action: 'destroy'
-  #------------------------------
-
-  # Routes for the Challenge_comment resource:
-  # CREATE
-  get '/challenge_comments/new', controller: 'challenge_comments', action: 'new', :as => 'new_challenge_comment'
-  post '/challenge_comments', controller: 'challenge_comments', action: 'create'
-
-  # READ
-  get '/challenge_comments', controller: 'challenge_comments', action: 'index'
-  get '/challenge_comments/:id', controller: 'challenge_comments', action: 'show', :as => 'challenge_comment'
-
-  # UPDATE
-  get '/challenge_comments/:id/edit', controller: 'challenge_comments', action: 'edit', :as => 'edit_challenge_comment'
-  patch '/challenge_comments/:id', controller: 'challenge_comments', action: 'update'
-
-  # DELETE
-  delete '/challenge_comments/:id', controller: 'challenge_comments', action: 'destroy'
   #------------------------------
 
   # Routes for the Game_ref resource:

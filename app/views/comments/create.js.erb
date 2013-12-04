@@ -1,3 +1,15 @@
 // In here we write JS for any subscribed browsers to execute
-$(".comment-material:first").prepend('<%= j(render 'comment', :comment => @comment) %>');
-$("input#comment_text").val("");
+// <% if @comment.challenge_id.present? %>
+//     var id = <%= @comment.challenge_id %>
+// <% elsif @comment.call_id.present? %>
+//     var id = <%= @comment.call_id %>
+// <% end %>
+
+
+
+<% publish_to '/games' do %>
+  var id = <%= @comment.call_id || @comment.challenge_id %>
+  console.log( $('.thing_' + id).find('input#comment_text')[0] )
+  $('.thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
+  $("input#comment_text").val("");
+<% end %>

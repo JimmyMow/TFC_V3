@@ -1,10 +1,28 @@
-<style type="text/css">
+  <style type="text/css">
+ /* .row {
+    border-bottom: solid 1px gray;
+    border-top: solid 1px gray;
+  }*/
+
+  .show_comments {
+    display: block;
+  }
+
+  .description {
+    font-family: "Raleway"
+  }
+
+  .margin {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
   .away_team {
-    text-align: right;
+    text-align: center;
   }
 
   .home_team {
-    text-align: left;
+    text-align: center;
   }
 
   .vs {
@@ -16,21 +34,21 @@
 
   }
 
-  .opponents {
+  .center {
     text-align: center;
-    margin: 20px 0;
+    margin: 20px;
   }
 
   .opponents a {
     display: block;
   }
 
-  .agree {
-    color: green;
+  .disagree:hover {
+    color: #D9534F;
   }
 
   .disagree {
-    color: red;
+    color: #D9534F;
   }
 
   .comments {
@@ -52,89 +70,85 @@
   .call .challenge {
     margin: 10px;
   }
-
 </style>
+<%= link_to "New Call", new_call_url(game_id: @game.id) %>
 
-<div class="container opponents">
-  <div class="row">
-    <div class="col-md-5">
-  <%= image_tag(@game.home_team.img_url) %>
-  <%= link_to @game.home_team.name, team_url(team_id: @game.home_team.id) %>
-    </div>
-    <div class="col-md-2 vs">
-   vs.
-    </div>
-    <div class="col-md-5">
-   <%= image_tag(@game.away_team.img_url) %>
-   <%= link_to @game.away_team.name, team_url(team_id: @game.away_team.id) %>
-    </div>
-   </div>
-</div>
-
-<%= render 'challenges/form', game_id: @game.id %>
-
-<%= notice %>
-
-<% if current_user.username == 'JimmyMow' %>
-  <%= link_to 'Add a call', new_call_url(game_id: @game.id), :class => 'btn btn-primary add_call' %>
+<% if notice.present? %>
+  notice present
+  <%= notice %>
 <% end %>
 
-
-<!-- CALLS -->
 <div class='container'>
-        <% @game.calls.reverse.each do |call| %>
-          <div class='row'>
-            <!-- <div class="col-lg-12"> -->
-              <div class='col-md-12 away_team'>
-                <h3><%= call.description %></h3>
+  <div class="row">
+    <div class='col-md-6 home_team'><%= image_tag(@game.home_team.img_url) %></div>
+    <div class='col-md-6 away_team'><%= image_tag(@game.away_team.img_url) %></div>
+  </div>
 
-                <% if current_user.calls.include?(call) %>
-                  <%= render 'downvote_call', call: call %>
-                <% else %>
-                  <%= link_to "Disagree", call_votes_url(user_id: current_user.id, call_id: call.id, vote: false, format: :js), remote: true, method: 'post', :id => "call-disagree-#{call.id}" %>
-                <% end %>
-                <%= render 'call_votes/vote_counter', call: call %>
-                <%= link_to pluralize(call.comments.count, 'Comment'), "#", :class => 'show_comments' %>
-                <div class='comments'>
-                  <%= render 'comments/form', call: call %>
-                  <% call.comments.reverse.each do |comment| %>
-                      <%= render 'comments/comment', comment: comment %>
-                  <% end %><!-- COMMENTS END -->
-                </div><!-- COMMENTS -->
+  <%= render 'challenges/form', game_id: @game.id %>
 
-              </div><!-- COL-MD-12 -->
-          </div><!-- ROW -->
-        <% end %><!-- CALLS END -->
+  <% @game.things.each do |thing| %>
 
-      <% @game.challenges.reverse.each do |challenge| %>
-          <div class='row'>
-            <div class="col-md-12 opponents">
-            <h3><%= challenge.description %></h3>
+  <% if @game.home_team.players.include?(thing.commit_player) %>
+    <% @style = 'pull-left home' %>
+  <% elsif @game.away_team.players.include?(thing.commit_player) %>
+    <% @style = 'pull-right away' %>
+  <% elsif thing.commit_player.nil? %>
+    <% @style = 'center' %>
+  <% end %>
 
-          <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
-          <% if challenge_ids.include?(challenge.id) %>
-            <%= render 'upvote_challenge', challenge: challenge %>
-          <% else %>
-            <%= link_to "Agree", challenge_votes_url(user_id: current_user.id, challenge_id: challenge.id, game_id: challenge.game_id, vote: true), method: 'post', remote: true, :class => "like-challenge-#{challenge.id}" %>
+    <div class= 'row'>
+      <% if thing.class.to_s == 'Challenge' %>
+        <div class="col-lg-12">
+          <div class="col-lg-4 <%= @style %> challenge">
+        </div>
+      <% else %>
+        <div class= 'col-md-4 <%= @style %>'>
+      <% end %>
+        <div class='thing_<%= thing.id %> margin'>
+          <span class='description'><%= thing.description %></span>
+          <!-- CALL -->
+          <% if thing.class.to_s == 'Call' %>
+              <% if current_user.calls.include?(thing) %>
+                  <%= render 'call_votes/downvote', call: thing %>
+              <% else %>
+                  <%= link_to "<i class=\"fa fa-flag-o\"></i>".html_safe, call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
+             <% end %>
+
+               <%= render 'call_votes/vote_counter', call: thing %>
+               <!-- CHALLENGE -->
+          <% elsif thing.class.to_s == 'Challenge' %>
+             <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
+
+             <% if challenge_ids.include?(thing.id) %>
+                 <%= render 'challenge_votes/upvote', challenge: thing %>
+             <% else %>
+
+                 <%= link_to "<i class=\"fa fa-flag-o\"></i>".html_safe, challenge_votes_url(user_id: current_user.id, challenge_id: thing.id, game_id: thing.game_id, vote: true), method: 'post', remote: true, :class => 'disagree', :id => "like-challenge-#{thing.id}" %>
+             <% end %>
+
+             <%= render 'challenge_votes/vote_counter', challenge: thing %>
           <% end %>
 
-          <%= render 'challenge_votes/vote_counter', challenge: challenge %>
 
-          <%= link_to pluralize(challenge.challenge_comments.count, 'Comment'), "#", :class => 'show_comments' %>
+    <%= link_to pluralize(thing.comments.count, 'Comment'), "#", :class => 'show_comments' %>
 
           <div class='comments'>
-            <%= render 'challenge_comments/form', challenge: challenge %>
+              <%= render 'comments/form', thing: thing %>
 
-            <% challenge.challenge_comments.reverse.each do |comment| %>
-              <%= render 'challenge_comments/comment', comment: comment %>
-            <% end %>
-          </div><!-- COMMENTS -->
+                <% thing.comments.reverse.each do |comment| %>
+                  <%= render 'comments/comment', comment: comment %>
+                <% end %>
+
+          </div><!-- comments -->
+
         </div>
-      </div><!-- ROW -->
-      <% end %>
-</div><!-- CONTAINER -->
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div><!-- container -->
 
-
+<%= subscribe_to "/games" %>
 
 <script>
 $(document).ready(function() {
@@ -142,10 +156,14 @@ $(document).ready(function() {
     $("a.show_comments").on("click", function() {
       console.log(this);
       var closestComment = $(this).siblings(".comments")
+
       closestComment.slideToggle();
+
       return false;
     });
   });
+
+
 </script>
 
 

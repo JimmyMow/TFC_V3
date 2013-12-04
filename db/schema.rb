@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121153704) do
+ActiveRecord::Schema.define(version: 20131122160406) do
 
   create_table "call_votes", force: true do |t|
     t.integer  "user_id"
@@ -30,22 +30,6 @@ ActiveRecord::Schema.define(version: 20131121153704) do
     t.integer  "commit_player_id"
     t.integer  "fouled_player_id"
     t.integer  "ref_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "challenge_comment_votes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "challenge_comment_id"
-    t.boolean  "vote"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "challenge_comments", force: true do |t|
-    t.text     "text"
-    t.integer  "challenge_id"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

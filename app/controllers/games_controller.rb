@@ -2,13 +2,18 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
+
+    array = User.all
+    array.sort_by! { |x| x.score }
+    array.reverse
+
+    @top_users = array.limit(5)
   end
 
   def show
     @game = Game.find_by(:id => params[:id])
     @comment = Comment.new
     @challenge = Challenge.new
-    @challenge_comment = ChallengeComment.new
     @calls = Call.all.page(params[:page]).per(5)
     @challenges = Challenge.all.page(params[:page]).per(5)
 

@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        params[:comment][:challenge_id]
         format.js
         format.html { redirect_to game_url(params[:comment][:game_id]), notice: 'It refrshed the page JS did not run.' }
       else

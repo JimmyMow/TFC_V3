@@ -1,32 +1,110 @@
-<h1>Games</h1>
-<%= notice %>
-<p><%= link_to 'Add a New Game', new_game_url %></p>
+<style type="text/css">
+  .users p {
+    text-align: center;
+  }
 
-<table>
-  <thead>
-    <tr>
-      <th>Home team</th>
-      <th>Away team</th>
-      <th>Time</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  .score {
+    color: #333333;
+    float: right;
+  }
 
-  <tbody>
-  <% @games.each do |game| %>
-    <tr>
-      <td><%= game.home_team.name %></td>
-      <td><%= game.away_team.name %></td>
-      <td><%= game.time %></td>
+  .fa, .fa-star {
+    color: #D9534F;
+  }
 
-      <td><%= link_to 'Show', game_url(game) %></td>
-      <td><%= link_to 'Edit', edit_game_url(game) %></td>
-      <td><%= link_to 'Destroy', game_url(game), method: 'delete', data: { confirm: "Do you really want to delete this game?" } %></td>
+  .disagree {
+    color: #D9534F;
+  }
 
-    </tr>
+  .game-container {
+    border-radius: 5px;
+    background-color: #333333;
+    border: 1px solid #D9534F;
+    padding: 15px;
+    margin: 15px;
+    }
+
+  .vs {
+    font-size: 45px;
+    color: white;
+    font-family: "Raleway";
+  }
+
+  .top {
+    text-align: center;
+    border-bottom: 1px solid #D9534F;
+  }
+
+  .bottom {
+    text-align: center;
+    padding-top: 5px;
+  }
+
+  .img-circle {
+    background-color: white;
+  }
+
+  h2 {
+    border-bottom: solid 1px #333333;
+    text-align: center;
+    color: black;
+  }
+
+  .bottom p {
+    color: white;
+  }
+
+  li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+  }
+
+  .top_users, .top_users:hover {
+    list-style: none;
+    color: black;
+  }
+
+  /*.users {
+    border-radius: 5px;
+    border: 1px solid black;
+  }*/
+
+
+</style>
+
+<div class="container">
+  <% if current_user.username == 'JimmyMow' %>
+    <p><%= link_to 'Add a New Game', new_game_url %></p>
   <% end %>
-  </tbody>
-</table>
 
+  <div class="col-lg-12">
+<!--     <h1>Scoreboard</h1>
+ -->    <div class="col-lg-4 pull-left users">
+      <h2>Best Fans</h2>
+      <p>Prizes given out each week to the best fans!</p>
+        <ul class='top_users'>
+        <% @top_users.each do |user| %>
+          <li><i class="fa fa-trophy"></i> <%= link_to user.username, user_url(user.id), :class => 'top_users' %> <span class='badge score'> <%= user.score %></span></li>
+        <% end %>
+        </ul>
+    </div>
+
+
+
+      <!-- <h1 class='pull-right'>Today's Games</h1> -->
+      <% @games.each do |game| %>
+      <div class="col-lg-7 pull-right game-container">
+        <div class="top">
+          <%= image_tag game.home_team.img_url, :class => 'pull-left img-thumbnail' %>
+          <span class="vs">VS.</span>
+          <%= image_tag game.away_team.img_url, :class => 'pull-right img-thumbnail' %>
+        </div>
+        <div class="bottom">
+          <p><i class="fa fa-flag disagree"></i> Challenges: <%= game.challenges.count %></p>
+          <%= link_to "Voice Your Opinion", game_url(game.id), :class => 'btn btn-danger btn-block' %>
+        </div>
+        </div>
+      <% end %>
+  </div>
+</div> <!-- contianer -->

@@ -9,6 +9,8 @@ class Game < ActiveRecord::Base
 
 
   def things
-    self.calls + self.challenges
+    array = self.calls + self.challenges
+    array.sort_by! { |x| x.created_at }
+    array.reverse
   end
 end

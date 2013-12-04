@@ -1,8 +1,11 @@
 class Challenge < ActiveRecord::Base
-  has_many :challenge_comments
+  has_many :comments
   has_many :comment_votes
   has_many :challenge_votes
   belongs_to :game
+
+  belongs_to :commit_player, :class_name => 'Player', :foreign_key => :commit_player_id
+  belongs_to :fouled_player, :class_name => 'Player', :foreign_key => :fouled_player_id
 
   def upvotes
     self.challenge_votes.where(:vote => true)

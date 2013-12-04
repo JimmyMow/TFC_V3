@@ -24,10 +24,13 @@ class ChallengesController < ApplicationController
     @challenge.ref_id = params[:challenge][:ref_id]
     @challenge.user_id = params[:challenge][:user_id]
 
-    if @challenge.save
-      redirect_to game_url(params[:challenge][:game_id])
-    else
-      render 'new'
+    respond_to do |format|
+      if @challenge.save
+        format.js
+        format.html { redirect_to game_url(params[:challenge][:game_id]) }
+      else
+        render 'new'
+      end
     end
   end
 

@@ -24,11 +24,13 @@ class CallsController < ApplicationController
     @call.fouled_player_id = params[:fouled_player_id]
     @call.ref_id = params[:ref_id]
 
-
-    if @call.save
-      redirect_to game_url(params[:game_id])
-    else
-      render 'new'
+    respond_to do |format|
+      if @call.save
+        format.js
+        format.html { redirect_to game_url(params[:game_id]) }
+      else
+        render 'new'
+      end
     end
   end
 

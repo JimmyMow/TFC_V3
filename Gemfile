@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+#Private-Pub
+gem "private_pub"
+gem "thin"
 #Pagination
 gem 'kaminari'
 #Jeff CRUD Generator

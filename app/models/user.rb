@@ -15,4 +15,7 @@ class User < ActiveRecord::Base
   has_many :comment_votes
   has_many :challenge_comment_votes
 
+  def score
+    (self.challenges.count * 5) + (self.call_votes.count * 2) + (self.comments.count)
+  end
 end
