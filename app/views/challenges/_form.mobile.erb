@@ -1,0 +1,25 @@
+<style type="text/css">
+.margin-zero-auto {
+    margin: 0 auto;
+  }
+</style>
+
+
+  <div class="row">
+    <div class="col-lg-12 challenge-form">
+      <div class="input-group margin-zero-auto">
+        <%= form_for(@challenge) do |f| %>
+          <div class="input-group">
+            <%= f.text_field :description, :placeholder => 'Add a challenge...', :class => 'form-control' %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :game_id, value: game_id %>
+          <span class='input-group-btn'>
+            <%= f.button 'Challenge!', :class => 'btn btn-danger', type: 'submit' %>
+          </span>
+          </div>
+        <% end %>
+      </div><!-- /input-group -->
+    </div><!-- col-lg-6 -->
+  </div> <!-- row -->
+
+

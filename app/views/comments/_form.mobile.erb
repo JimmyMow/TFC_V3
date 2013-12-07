@@ -1,0 +1,13 @@
+<%= form_for(@comment, remote: true) do |f| %>
+  <%= f.text_field :text, placeholder: 'Write a comment...', :class => 'form-control' %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+
+  <% if thing.class.to_s == 'Call' %>
+    <%= f.hidden_field :call_id, :value => thing.id %>
+    <%= f.hidden_field :game_id, :value => thing.game.id %>
+  <% elsif thing.class.to_s == 'Challenge'  %>
+    <%= f.hidden_field :challenge_id, :value => thing.id %>
+    <%= f.hidden_field :game_id, :value => thing.game.id %>
+  <% end %>
+<% end %>
+

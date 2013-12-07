@@ -16,6 +16,7 @@
 
   .disagree {
     color: #D9534F;
+    margin-bottom: 10px;
   }
 
   .game-container {
@@ -66,23 +67,10 @@
       </div>
       <div class="bottom">
         <p><i class="fa fa-flag disagree"></i> Challenges: <%= game.challenges.count %></p>
-        <%= link_to "Watch this game", game_url(game.id), :class => 'button-negative' %>
+        <%= link_to "Watch this game", game_url(game.id), :class => 'button-negative button-block' %>
       </div>
       </div>
     <% end %>
   </div> <!-- 12 -->
 </div> <!-- content -->
 
-<nav class="bar-tab">
-  <ul class="tab-inner">
-    <li class="tab-item">
-      <%= link_to "<i class=\"fa fa-home\"></i>".html_safe, games_url  %>
-    </li>
-    <li class="tab-item">
-      <%= link_to "Full Site", :mobile => 0 %>
-    </li>
-    <li class="tab-item">
-      <%= link_to "Log Out", "#" %>
-    </li>
-  </ul>
-</nav>

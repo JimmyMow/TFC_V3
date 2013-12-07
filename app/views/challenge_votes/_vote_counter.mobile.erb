@@ -1,0 +1,6 @@
+<span id="score-<%= challenge.id %>">
+  <% if challenge.upvotes.count > 0 %>
+    +
+  <% end %>
+  <%= challenge.upvotes.count %>
+</span>

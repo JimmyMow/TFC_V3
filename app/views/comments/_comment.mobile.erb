@@ -1,0 +1,28 @@
+<style type="text/css">
+  .time-ago {
+    color: gray;
+  }
+
+  .comments {
+    background-color: #DDE1E6;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .comment {
+    margin-left: 10px;
+    border-bottom: solid 1px gray;
+  }
+
+  .comment-material {
+    color: black;
+    margin-top: 5px;
+  }
+</style>
+
+  <div class='comment'>
+  <p class='comment-material'>
+    <%= link_to comment.user.username, user_url(comment.user.id) %>
+    <%= comment.text %>
+  <p class='time-ago'><%= time_ago_in_words(comment.created_at) %> ago</p>
+</div>

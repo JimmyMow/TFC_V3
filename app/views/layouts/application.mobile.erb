@@ -3,16 +3,30 @@
 <head>
   <title>TFCV3-MOBILE</title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag "ratchet.css", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "mobile", media: "all", "data-turbolinks-track" => true %>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
   <script type="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+  <%= stylesheet_link_tag "ratchet.css", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "ratchet.js", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "mobile", media: "all", "data-turbolinks-track" => true %>
   <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <%#   = javascript_include_tag "ratchet.js", media: "all", "data-turbolinks-track" => true %>
+  <meta name="viewport" content="width=device-width">
+
 </head>
 <body>
   <% if current_user.present? %>
-    <%= link_to "<i class=\"fa fa-home\"></i>".html_safe, games_url %>
-    <%= link_to "Log Out", sessions_url, method: 'delete' %>
+    <nav class="bar-tab">
+      <ul class="tab-inner">
+        <li class="tab-item">
+          <%= link_to "<i class=\"fa fa-home\"></i>".html_safe, games_url  %>
+        </li>
+        <li class="tab-item">
+          <%= link_to "Full Site", :mobile => 0 %>
+        </li>
+        <li class="tab-item">
+          <%= link_to "Log Out", "#" %>
+        </li>
+      </ul>
+    </nav>
   <% else %>
     <div class="navbar navbar navbar-fixed-top" role="navigation">
       <div class="container">
