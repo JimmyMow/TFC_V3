@@ -1,8 +1,11 @@
   <style type="text/css">
- /* .row {
-    border-bottom: solid 1px gray;
-    border-top: solid 1px gray;
-  }*/
+  .challenge-form {
+    margin-bottom: 15px;
+  }
+
+  .agree, .agree:hover {
+    color: green;
+  }
 
   .show_comments {
     display: block;
@@ -12,67 +15,126 @@
     font-family: "Raleway"
   }
 
-  .margin {
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-
-  .away_team {
-    text-align: center;
-  }
-
-  .home_team {
-    text-align: center;
-  }
-
-  .vs {
-    font-size: 35px;
-  }
-
-  .challenge-form {
-    text-align: center;
-
-  }
-
-  .center {
-    text-align: center;
-    margin: 20px;
-  }
-
   .opponents a {
     display: block;
   }
 
-  .disagree:hover {
+  .disagree, .disagree:hover {
     color: #D9534F;
   }
 
-  .disagree {
-    color: #D9534F;
-  }
+  /*ARVIN*/
+
+body {
+  background: #ccc;
+}
 
   .comments {
-    background-color: #DDE1E6;
-    border-radius: 5px;
-    padding: 10px;
+    max-height: 500px;
+    overflow: scroll;
   }
 
-  .comment {
-    margin-left: 10px;
-    border-bottom: solid 1px gray;
-  }
+  .col-xs-6, article {
+  background: white;
+  padding: 20px;
+  position: relative;
+  border-bottom: 7px solid #bbb;
+}
 
-  .comment-material {
-    color: black;
-    margin-top: 5px;
-  }
+.row {
+  margin: 0;
+  text-align: center;
+  padding: 0 50px;
+}
 
-  .call .challenge {
-    margin: 10px;
-  }
+.left {
+  border-right: 7px solid #bbb;
+
+/*   hack to line-up center line */
+  margin-left: 7px;
+}
+
+.right {
+  border-left: 7px solid #bbb;
+}
+
+.center {
+  border: 7px solid #D9534F;
+}
+
+.left .logo {
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  padding: 20px;
+  background-color: #999;
+}
+
+.right .logo {
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  padding: 20px;
+  background-color: #999;
+}
+
+.center .logo {
+  border-radius: 50%;
+  position: absolute;
+  top: -25%;
+  left: 40%;
+}
+
+.call {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  color: #55;
+}
+
+.player {
+  margin-right: 6px;
+  font-size: 1.5em;
+  display: inline-block;
+}
+
+.ref {
+  font-size: 1.5em;
+  display: inline-block;
+}
+
+.flag {
+  font-size: 1.2em;
+}
+
+.comment-container {
+  background: #eee;
+  position: absolute;
+  width: 94%;
+  left: 3%;
+  top: 100%;
+  z-index:100;
+  height: 250px;
+  overflow: scroll;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, .3);
+  display: none;
+}
+
+.comment-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.comment-container li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
 </style>
-<%= link_to "New Call", new_call_url(game_id: @game.id) %>
-
+<% if current_user.username == 'JimmyMow' %>
+  <%= link_to "New Call", new_call_url(game_id: @game.id) %>
+<% end %>
 <% if notice.present? %>
   notice present
   <%= notice %>
@@ -80,8 +142,8 @@
 
 <div class='container'>
   <div class="row">
-    <div class='col-md-6 home_team'><%= image_tag(@game.home_team.img_url) %></div>
-    <div class='col-md-6 away_team'><%= image_tag(@game.away_team.img_url) %></div>
+    <div class='col-xs-3'><%= image_tag(@game.home_team.img_url) %> <h3>Miami Heat</h3></div>
+    <div class='col-xs-3 col-xs-offset-6'><%= image_tag(@game.away_team.img_url) %> <h3>Chicago Bulls</h3></div>
   </div>
 
   <%= render 'challenges/form', game_id: @game.id %>
@@ -89,29 +151,45 @@
   <% @game.things.each do |thing| %>
 
   <% if @game.home_team.players.include?(thing.commit_player) %>
-    <% @style = 'pull-left home' %>
+    <% @style = 'left ' %>
   <% elsif @game.away_team.players.include?(thing.commit_player) %>
-    <% @style = 'pull-right away' %>
+    <% @style = 'right' %>
   <% elsif thing.commit_player.nil? %>
     <% @style = 'center' %>
   <% end %>
 
-    <div class= 'row'>
+    <div class="event-container row">
       <% if thing.class.to_s == 'Challenge' %>
-        <div class="col-lg-12">
-          <div class="col-lg-4 <%= @style %> challenge">
-        </div>
-      <% else %>
-        <div class= 'col-md-4 <%= @style %>'>
+        <article class="col-xs-6 col-xs-offset-3 <%= @style %>">
+       <% elsif @game.away_team.players.include?(thing.commit_player) %>
+        <article class="col-xs-6 col-xs-offset-6 <%= @style %>">
+       <% else %>
+        <article class="col-xs-6 <%= @style %>">
       <% end %>
-        <div class='thing_<%= thing.id %> margin'>
-          <span class='description'><%= thing.description %></span>
+
+        <% if thing.class.to_s == 'Challenge' %>
+          <div class='challenge_thing_<%= thing.id %> margin'>
+        <% elsif thing.class.to_s == 'Call' %>
+          <div class="call_thing_<%= thing.id %>">
+        <% end %>
+          <% if @game.home_team.players.include?(thing.commit_player) %>
+          <div class="logo">
+            <%= image_tag(@game.home_team.img_url, width: '50', height: '50', alt: '') %>
+          </div>
+          <% elsif @game.away_team.players.include?(thing.commit_player) %>
+          <div class="logo">
+            <%= image_tag(@game.away_team.img_url, width: '50', height: '50', alt: '') %>
+          </div>
+          <% end %>
           <!-- CALL -->
           <% if thing.class.to_s == 'Call' %>
+          <div class="call">CALL</div>
+          <div class="player"><%= thing.description %></div>
+          <!-- <div class="flag"><a href="#">Disagree!</a></div> -->
               <% if current_user.calls.include?(thing) %>
-                  <%= render 'call_votes/downvote', call: thing %>
+                  <div class='flag'><%= render 'call_votes/downvote', call: thing %></div>
               <% else %>
-                  <%= link_to "<i class=\"fa fa-flag-o\"></i>".html_safe, call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
+                  <div class='flag'><%= link_to "I Challenge!", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %></div>
              <% end %>
 
                <%= render 'call_votes/vote_counter', call: thing %>
@@ -119,11 +197,13 @@
           <% elsif thing.class.to_s == 'Challenge' %>
              <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
 
+          <div class="call">FAN CHALLENGE</div>
+          <div class="player"><%= thing.description %></div>
              <% if challenge_ids.include?(thing.id) %>
                  <%= render 'challenge_votes/upvote', challenge: thing %>
              <% else %>
 
-                 <%= link_to "<i class=\"fa fa-flag-o\"></i>".html_safe, challenge_votes_url(user_id: current_user.id, challenge_id: thing.id, game_id: thing.game_id, vote: true), method: 'post', remote: true, :class => 'disagree', :id => "like-challenge-#{thing.id}" %>
+                 <div class='flag'><%= link_to "I Agree!", challenge_votes_url(user_id: current_user.id, challenge_id: thing.id, game_id: thing.game_id, vote: true), method: 'post', remote: true, :class => 'agree', :id => "like-challenge-#{thing.id}" %></div>
              <% end %>
 
              <%= render 'challenge_votes/vote_counter', challenge: thing %>
@@ -132,20 +212,20 @@
 
     <%= link_to pluralize(thing.comments.count, 'Comment'), "#", :class => 'show_comments' %>
 
-          <div class='comments'>
+          <section class='comments' style= "display: none">
               <%= render 'comments/form', thing: thing %>
 
                 <% thing.comments.reverse.each do |comment| %>
                   <%= render 'comments/comment', comment: comment %>
                 <% end %>
 
-          </div><!-- comments -->
+          </section><!-- comments -->
 
-        </div>
-      </div>
+        </div><!-- thing -->
+      </article><!-- call 4 -->
+    </article><!-- challenge 4 -->
     </div>
   <% end %>
-  </div>
 </div><!-- container -->
 
 <%= subscribe_to "/games" %>

@@ -1,15 +1,11 @@
-// In here we write JS for any subscribed browsers to execute
-// <% if @comment.challenge_id.present? %>
-//     var id = <%= @comment.challenge_id %>
-// <% elsif @comment.call_id.present? %>
-//     var id = <%= @comment.call_id %>
-// <% end %>
-
-
-
 <% publish_to '/games' do %>
   var id = <%= @comment.call_id || @comment.challenge_id %>
   console.log( $('.thing_' + id).find('input#comment_text')[0] )
-  $('.thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
+  <% if @comment.challenge_id.present? %>
+    $('.challenge_thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
+  <% elsif @comment.call_id.present? %>
+    $('.call_thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
+  <% end %>
+
   $("input#comment_text").val("");
 <% end %>

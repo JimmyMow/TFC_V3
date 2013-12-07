@@ -1,23 +1,15 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>TFCV3</title>
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <title>TFCV3-MOBILE</title>
   <%= csrf_meta_tags %>
-  <!-- Font Awesome -->
-  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <%= stylesheet_link_tag "ratchet.css", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "mobile", media: "all", "data-turbolinks-track" => true %>
   <script type="http://code.jquery.com/jquery-2.0.1.min.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <%#   = javascript_include_tag "ratchet.js", media: "all", "data-turbolinks-track" => true %>
 </head>
 <body>
-  <% if mobile_device? %>
-    <%= link_to "Full Site", :mobile => 0 %>
-  <% else %>
-    <%= link_to "Mobile Site", :mobile => 1 %>
-  <% end %>
-
   <% if current_user.present? %>
     <%= link_to "<i class=\"fa fa-home\"></i>".html_safe, games_url %>
     <%= link_to "Log Out", sessions_url, method: 'delete' %>

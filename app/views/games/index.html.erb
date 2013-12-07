@@ -91,10 +91,10 @@
     </div>
 
 
-
-      <!-- <h1 class='pull-right'>Today's Games</h1> -->
+      <div class="col-lg-7 pull-right">
+        <h2>Today's Games</h2>
       <% @games.each do |game| %>
-      <div class="col-lg-7 pull-right game-container">
+      <div class="game-container">
         <div class="top">
           <%= image_tag game.home_team.img_url, :class => 'pull-left img-thumbnail' %>
           <span class="vs">VS.</span>
@@ -106,5 +106,6 @@
         </div>
         </div>
       <% end %>
+    </div>
   </div>
 </div> <!-- contianer -->
