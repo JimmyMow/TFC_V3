@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  has_many :comments, through: :comment_votes
+  has_many :comments
   has_many :challenges
   has_many :challenge_votes
   has_many :challenge_comments
