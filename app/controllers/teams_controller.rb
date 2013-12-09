@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
     @team = Team.find_by(:id => params[:id])
     cookies[:team_id] = params[:team_id]
 
-    redirect_to teams_url
+    redirect_to teams_url unless mobile_device?
   end
 
   def new

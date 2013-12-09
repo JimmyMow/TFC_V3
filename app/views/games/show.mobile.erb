@@ -1,6 +1,14 @@
-<div class='container'>
-  <div class="row">
-    <div class='col-xs-3'><%= image_tag(@game.home_team.img_url) %> <h3>Miami Heat</h3></div>
-    <div class='col-xs-3 col-xs-offset-6'><%= image_tag(@game.away_team.img_url) %> <h3>Chicago Bulls</h3></div>
-  </div>
-</div>
+<style type="text/css">
+  .title {
+    text-align: center;
+  }
+
+</style>
+
+<fieldset class="ui-grid-b">
+    <div class="ui-block-a title"><%= image_tag(@game.home_team.img_url) %></div>
+    <div class="ui-block-b title"><p>VS.</p></div>
+    <div class="ui-block-c title"><%= image_tag(@game.away_team.img_url) %></div>
+</fieldset>
+
+

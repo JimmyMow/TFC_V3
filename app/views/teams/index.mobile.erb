@@ -1,0 +1,9 @@
+<div data-role='page'>
+  <div data-role='content'>
+    <ul data-role="listview" data-inset="true" data-filter="true">
+      <% @teams.each do |team| %>
+        <li><%= link_to team.name, team_url(team.id) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

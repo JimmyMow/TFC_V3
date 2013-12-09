@@ -25,7 +25,7 @@ TFCV3::Application.routes.draw do
 
   post '/sessions' => 'sessions#create', as: 'session'
 
-  delete '/sessions' => 'sessions#destroy'
+  get '/sessions' => 'sessions#destroy'
   # Random Pages
   get '/home' => 'pages#home', as: 'home'
   get '/stats' => 'pages#stats', as: 'stats'

@@ -1,6 +1,4 @@
 <style type="text/css">
-
-<style type="text/css">
   .users p {
     text-align: center;
   }
@@ -44,9 +42,9 @@
   }
 
   h2 {
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px gray;
     text-align: center;
-    color: white;
+    color: black;
   }
 
   .bottom p {
@@ -55,22 +53,26 @@
 
 </style>
 
-<div class="content">
-  <div class="col-xs-12">
+<div data-role='page'>
+  <div data-role='content'>
       <h2>Today's Games</h2>
     <% @games.each do |game| %>
     <div class="game-container">
-      <div class="top">
-        <%= image_tag game.home_team.img_url, :class => 'pull-left img-thumbnail' %>
-        <span class="vs">VS.</span>
-        <%= image_tag game.away_team.img_url, :class => 'pull-right img-thumbnail' %>
-      </div>
-      <div class="bottom">
-        <p><i class="fa fa-flag disagree"></i> Challenges: <%= game.challenges.count %></p>
-        <%= link_to "Watch this game", game_url(game.id), :class => 'button-negative button-block' %>
-      </div>
+
+        <div class="top">
+          <%= image_tag game.home_team.img_url, :class => 'pull-left img-thumbnail' %>
+          <span class="vs">VS</span>
+          <%= image_tag game.away_team.img_url, :class => 'pull-right img-thumbnail' %>
+        </div>
+
+        <div class="bottom">
+          <p><i class="fa fa-flag disagree"></i> Challenges: <%= game.challenges.count %></p>
+          <%#= link_to "Watch this game", game_url(game.id) %>
+          <a href="/games/1" data-role="button" class='watch-button' data-theme='d'>Watch this game</a>
+        </div>
+
       </div>
     <% end %>
-  </div> <!-- 12 -->
-</div> <!-- content -->
+  </div> <!-- content -->
+</div> <!-- page -->
 
