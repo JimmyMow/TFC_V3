@@ -21,7 +21,7 @@
 
   <% if current_user.present? %>
     <%= link_to "<i class=\"fa fa-home\"></i>".html_safe, games_url %>
-    <%= link_to "Log Out", sessions_url, method: 'delete' %>
+    <%= link_to "Log Out", sessions_url %>
   <% else %>
     <div class="navbar navbar navbar-fixed-top" role="navigation">
       <div class="container">

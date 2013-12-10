@@ -1,11 +1,17 @@
 <% publish_to '/games' do %>
   var id = <%= @comment.call_id || @comment.challenge_id %>
-  console.log( $('.thing_' + id).find('input#comment_text')[0] )
-  <% if @comment.challenge_id.present? %>
-    $('.challenge_thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
-  <% elsif @comment.call_id.present? %>
-    $('.call_thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
-  <% end %>
 
+  console.log( $('.thing_' + id).find('input#comment_text')[0] )
+
+  <% if @comment.challenge_id.present? %>
+
+    $('.challenge_thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
+
+  <% elsif @comment.call_id.present? %>
+
+    $('.call_thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
+
+  <% end %>
+  $('.call_thing_2').find('.show_comments').replceWith('<%= j(render 'show_comments', :comment => @comment) %>');
   $("input#comment_text").val("");
 <% end %>

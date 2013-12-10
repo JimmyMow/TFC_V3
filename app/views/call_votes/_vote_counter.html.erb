@@ -1,6 +1,3 @@
- <span id="score-<%= call.id %>">
-  <% if call.downvotes.count > 0 %>
-    -
-  <% end %>
+ <span id="score-<%= call.id %> score">
   <%= call.downvotes.count %>
 </span>

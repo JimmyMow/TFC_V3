@@ -1,3 +1,15 @@
+<style type="text/css">
+  h4 {
+    text-align: center;
+  }
+</style>
+
 <div data-role='content'>
-  <h1>YO!</h1>
+  <h2><%= image_tag(@team.img_url, width: '35', height: '35') %> <%= @team.name %></h2>
+  <h4>Games</h4>
+    <ul data-role='list-view'>
+      <% @team.total_games.each do |game| %>
+        <li><%= link_to "#{game.home_team.name} vs #{game.away_team.name}", game_url(game.id) %></li>
+      <% end %>
+    </ul>
 </div>

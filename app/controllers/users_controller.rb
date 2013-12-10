@@ -18,11 +18,12 @@ class UsersController < ApplicationController
     @user.password = params[:password]
     @user.password_confirmation = params[:password_confirmation]
 
-    @user.save
-
-    session[:user_id] = @user.id
-
-    redirect_to games_url
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to games_url
+    else
+      redirect_to new_session_url, notice: 'We had trouble signing you up. Please try again.'
+    end
   end
 
   def edit
@@ -30,14 +31,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by(:id => params[:id])
-    @user.first_name = params[:first_name]
-    @user.last_name = params[:last_name]
-    @user.username = params[:username]
-    @user.email = params[:email]
-    @user.iq = params[:iq]
-    @user.password_digest = params[:password_digest]
-    @user.description = params[:description]
+    if current_user.present?
+      @user = User.find_by(:id => params[:id])
+      @user.first_name = params[:user][:first_name]
+      @user.last_name = params[:user][:last_name]
+      @user.username = params[:user][:username]
+      @user.email = params[:user][:email]
+      @user.iq = params[:user][:iq]
+      @user.password = params[:user][:password]
+      @user.password_confirmation = params[:user][:password_confirmation]
+      @user.description = params[:user][:description]
+    end
 
     if @user.save
       redirect_to user_url(params[:id])

@@ -1,4 +1,8 @@
   <style type="text/css">
+  .score {
+    font-size: 20px;
+  }
+
   .container {
     background: url(/assets/line-background.png) repeat-y 50%;
   }
@@ -82,7 +86,7 @@ body {
 .call {
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
-  font-size: 3em;
+  font-size: 2em;
   color: #55;
 }
 
@@ -99,6 +103,8 @@ body {
 
 .flag {
   font-size: 1.2em;
+  display: inline;
+  margin-right: 10px;
 }
 
 .comment-container {
@@ -134,8 +140,8 @@ body {
 
 <div class='container'>
   <div class="row">
-    <div class='col-xs-3'><%= image_tag(@game.home_team.img_url) %> <h3>Miami Heat</h3></div>
-    <div class='col-xs-3 col-xs-offset-6'><%= image_tag(@game.away_team.img_url) %> <h3>Chicago Bulls</h3></div>
+    <div class='col-xs-3'><%= image_tag(@game.home_team.img_url) %> <h3><%= @game.home_team.name %></h3></div>
+    <div class='col-xs-3 col-xs-offset-6'><%= image_tag(@game.away_team.img_url) %> <h3><%= @game.away_team.name %></h3></div>
   </div>
 
   <%= render 'challenges/form', game_id: @game.id %>
@@ -175,16 +181,17 @@ body {
           <% end %>
           <!-- CALL -->
           <% if thing.class.to_s == 'Call' %>
-          <div class="call">CALL</div>
+          <div class="call"><%= thing.call_type %></div>
           <div class="player"><%= thing.description %></div>
           <!-- <div class="flag"><a href="#">Disagree!</a></div> -->
               <% if current_user.calls.include?(thing) %>
                   <div class='flag'><%= render 'call_votes/downvote', call: thing %></div>
               <% else %>
-                  <div class='flag'><%= link_to "I Challenge!", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %></div>
+                  <div class='flag'><%= link_to "I Challenge!", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
              <% end %>
 
                <%= render 'call_votes/vote_counter', call: thing %>
+               </div>
                <!-- CHALLENGE -->
           <% elsif thing.class.to_s == 'Challenge' %>
              <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
@@ -201,8 +208,7 @@ body {
              <%= render 'challenge_votes/vote_counter', challenge: thing %>
           <% end %>
 
-
-    <%= link_to pluralize(thing.comments.count, 'Comment'), "#", :class => 'show_comments' %>
+          <%= render 'comments/show_comments', thing: thing %>
 
           <section class='comments' style= "display: none">
               <%= render 'comments/form', thing: thing %>
