@@ -93,7 +93,6 @@ body {
 .player {
   margin-right: 6px;
   font-size: 1.5em;
-  display: inline-block;
 }
 
 .ref {
@@ -197,7 +196,7 @@ body {
              <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
 
           <div class="call">FAN CHALLENGE</div>
-          <div class="player"><%= thing.description %></div>
+
              <% if challenge_ids.include?(thing.id) %>
                  <%= render 'challenge_votes/upvote', challenge: thing %>
              <% else %>
