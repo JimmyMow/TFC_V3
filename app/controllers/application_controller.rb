@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
 protect_from_forgery with: :exception
 
 before_filter :prepare_for_mobile
+before_filter :display_session_values
+
+def display_session_values
+  Rails.logger.debug "mobile_param: #{session[:mobile_param]}"
+  Rails.logger.debug "user_id: #{session[:user_id]}"
+end
 
 private
 

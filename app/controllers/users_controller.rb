@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:edit, :show, :update, :destroy]
+  before_action :protection, only: [:edit, :update, :destroy]
+
+  def protection
+    unless current_user == @user
+      redirect_to :back, notice: 'Not allowed.'
+    end
+  end
 
   def index
     @users = User.all
@@ -54,5 +62,10 @@ class UsersController < ApplicationController
     @user = User.find_by(:id => params[:id])
     @user.destroy
     redirect_to users_url
+  end
+
+  private
+  def set_user
+    @user = User.find_by(params[:id])
   end
 end

@@ -5,6 +5,7 @@
 
   .container {
     background: url(/assets/line-background.png) repeat-y 50%;
+    margin-bottom: 150px;
   }
 
   .challenge-form {
@@ -172,25 +173,23 @@ body {
           <% if @game.home_team.players.include?(thing.commit_player) %>
           <div class="logo">
             <%= image_tag(@game.home_team.img_url, width: '50', height: '50', alt: '') %>
-          </div>
+          </div> <!-- logo -->
           <% elsif @game.away_team.players.include?(thing.commit_player) %>
           <div class="logo">
             <%= image_tag(@game.away_team.img_url, width: '50', height: '50', alt: '') %>
-          </div>
+          </div> <!-- logo -->
           <% end %>
           <!-- CALL -->
           <% if thing.class.to_s == 'Call' %>
           <div class="call"><%= thing.call_type %></div>
           <div class="description"><%= thing.description %></div>
-          <!-- <div class="flag"><a href="#">Disagree!</a></div> -->
-
               <% if current_user.calls.include?(thing) %>
                   <div class='flag'><%= render 'call_votes/downvote', call: thing %></div>
               <% else %>
-                  <div class='flag'><%= link_to "I Challenge!", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
-             <% end %>
+                  <%= link_to "Challenge!", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
+              <% end %>
                <%= render 'call_votes/vote_counter', call: thing %>
-                  </div>
+
 
 
                 <span class='show_comments'><%= link_to "<i class=\"fa fa-comment\"></i>".html_safe, "#" %> <%= render 'comments/counter', thing: thing %></span>
@@ -229,7 +228,7 @@ body {
 
       </article><!-- call 4 -->
     </article><!-- challenge 4 -->
-    </div>
+    </div> <!-- call or challenge -->
   <% end %>
   </div><!-- container -->
 

@@ -1,4 +1,4 @@
 <% publish_to '/games' do %>
   $('#like-challenge-<%= @challenge_vote.challenge_id %>').replaceWith('<%= j(render 'upvote', challenge: @challenge_vote.challenge) %>');
-  $('#score-<%= @challenge_vote.challenge.id %>').replaceWith('<%= j(render 'vote_counter', challenge: @challenge_vote.challenge) %>');
+  $('#challenge-score-<%= @challenge_vote.challenge.id %>').replaceWith('<%= j(render 'vote_counter', challenge: @challenge_vote.challenge) %>');
 <% end %>

@@ -34,4 +34,8 @@
   <b>Score:</b>
   <%= @user.score %>
 </p>
-<%= link_to 'Edit Profile', edit_user_url %>
+<% if current_user == @user %>
+  <%= link_to 'Edit Profile', edit_user_url %>
+<% end %>
+
+<%= notice %>

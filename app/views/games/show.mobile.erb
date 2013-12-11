@@ -36,6 +36,8 @@
       <div class="ui-block-c title"><%= image_tag(@game.away_team.img_url) %></div>
   </fieldset>
 
+  <%= render 'challenges/form_mobile', game_id: @game_id %>
+
   <div class='calls-challenges'>
     <% @game.things.each do |thing| %>
       <% if thing.class.to_s == "Challenge" %>
@@ -81,4 +83,4 @@
   </div><!-- calls-challenges -->
 </div><!-- content -->
 
-<%= subscribe_to "/games" %>
+
