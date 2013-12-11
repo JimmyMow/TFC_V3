@@ -1,4 +1,10 @@
   <style type="text/css">
+  .side_by_side {
+    display: inline-block;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+
   .like-comment {
     display: inline;
   }
@@ -17,7 +23,7 @@
   }
 
   .show_comments {
-    display: block;
+    /*display: block;*/
   }
 
   .description {
@@ -35,7 +41,7 @@
   /*ARVIN*/
 
 body {
-  background: #ccc;
+  background: white;
 }
 
   .comments {
@@ -104,7 +110,7 @@ body {
 .flag {
   font-size: 1.2em;
   display: inline;
-  margin-right: 10px;
+  /*margin-right: 10px;*/
 }
 
 .comment-container {
@@ -183,6 +189,7 @@ body {
           <% if thing.class.to_s == 'Call' %>
           <div class="call"><%= thing.call_type %></div>
           <div class="description"><%= thing.description %></div>
+          <div class="side_by_side">
               <% if current_user.calls.include?(thing) %>
                   <div class='flag'><%= render 'call_votes/downvote', call: thing %></div>
               <% else %>
@@ -190,9 +197,10 @@ body {
               <% end %>
                <%= render 'call_votes/vote_counter', call: thing %>
 
+               </div>
 
 
-                <span class='show_comments'><%= link_to "<i class=\"fa fa-comment\"></i>".html_safe, "#" %> <%= render 'comments/counter', thing: thing %></span>
+                <div class='show_comments side_by_side'><%= link_to "<i class=\"fa fa-comment\"></i>".html_safe, "#" %> <%= render 'comments/counter', thing: thing %></div>
 
                 <!-- CHALLENGE -->
           <% elsif thing.class.to_s == 'Challenge' %>
@@ -200,17 +208,18 @@ body {
 
           <div class="call"><%= link_to thing.user.username, user_url(thing.user.id) %> Challenged:</div>
           <div class='description'><%= thing.description %></div>
+              <div class='side_by_side'>
+               <% if challenge_ids.include?(thing.id) %>
+                   <%= render 'challenge_votes/upvote', challenge: thing %>
+               <% else %>
 
-             <% if challenge_ids.include?(thing.id) %>
-                 <%= render 'challenge_votes/upvote', challenge: thing %>
-             <% else %>
+                   <%= link_to "I Agree!", challenge_votes_url(user_id: current_user.id, challenge_id: thing.id, game_id: thing.game_id, vote: true), method: 'post', remote: true, :class => 'agree', :id => "like-challenge-#{thing.id}" %>
+               <% end %>
 
-                 <div class='flag'><%= link_to "I Agree!", challenge_votes_url(user_id: current_user.id, challenge_id: thing.id, game_id: thing.game_id, vote: true), method: 'post', remote: true, :class => 'agree', :id => "like-challenge-#{thing.id}" %></div>
-             <% end %>
+               <%= render 'challenge_votes/vote_counter', challenge: thing %>
+             </div>
 
-             <%= render 'challenge_votes/vote_counter', challenge: thing %>
-
-            <span class='show_comments'><%= link_to "<i class=\"fa fa-comment\"></i>".html_safe, "#" %> <%= render 'comments/counter', thing: thing %></span>
+            <div class='show_comments side_by_side'><%= link_to "<i class=\"fa fa-comment\"></i>".html_safe, "#" %> <%= render 'comments/counter', thing: thing %></div>
           <% end %>
 
 
