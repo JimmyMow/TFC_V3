@@ -1,6 +1,6 @@
   <style type="text/css">
-  .score {
-    font-size: 20px;
+  .like-comment {
+    display: inline;
   }
 
   .container {
@@ -20,7 +20,7 @@
   }
 
   .description {
-    font-family: "Raleway"
+    font-size: 25px;
   }
 
   .opponents a {
@@ -49,7 +49,7 @@ body {
 }
 
 .row {
-  margin: 20px;
+  margin: 40px;
   text-align: center;
   padding: 0 50px;
 }
@@ -86,7 +86,7 @@ body {
 .call {
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
-  font-size: 2em;
+  font-size: 1.5em;
   color: #55;
 }
 
@@ -137,14 +137,14 @@ body {
   <%= notice %>
 <% end %>
 
-<div class='container'>
-  <div class="row">
+    <div class="row">
     <div class='col-xs-3'><%= image_tag(@game.home_team.img_url) %> <h3><%= @game.home_team.name %></h3></div>
     <div class='col-xs-3 col-xs-offset-6'><%= image_tag(@game.away_team.img_url) %> <h3><%= @game.away_team.name %></h3></div>
-  </div>
+    </div>
 
   <%= render 'challenges/form', game_id: @game.id %>
 
+<div class='container'>
   <% @game.things.each do |thing| %>
 
   <% if @game.home_team.players.include?(thing.commit_player) %>
@@ -181,21 +181,26 @@ body {
           <!-- CALL -->
           <% if thing.class.to_s == 'Call' %>
           <div class="call"><%= thing.call_type %></div>
-          <div class="player"><%= thing.description %></div>
+          <div class="description"><%= thing.description %></div>
           <!-- <div class="flag"><a href="#">Disagree!</a></div> -->
+
               <% if current_user.calls.include?(thing) %>
                   <div class='flag'><%= render 'call_votes/downvote', call: thing %></div>
               <% else %>
                   <div class='flag'><%= link_to "I Challenge!", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
              <% end %>
-
                <%= render 'call_votes/vote_counter', call: thing %>
-               </div>
-               <!-- CHALLENGE -->
+                  </div>
+
+
+                <span class='show_comments'><%= link_to "<i class=\"fa fa-comment\"></i>".html_safe, "#" %> <%= render 'comments/counter', thing: thing %></span>
+
+                <!-- CHALLENGE -->
           <% elsif thing.class.to_s == 'Challenge' %>
              <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
 
-          <div class="call">FAN CHALLENGE</div>
+          <div class="call"><%= link_to thing.user.username, user_url(thing.user.id) %> Challenged:</div>
+          <div class='description'><%= thing.description %></div>
 
              <% if challenge_ids.include?(thing.id) %>
                  <%= render 'challenge_votes/upvote', challenge: thing %>
@@ -205,9 +210,12 @@ body {
              <% end %>
 
              <%= render 'challenge_votes/vote_counter', challenge: thing %>
+
+            <span class='show_comments'><%= link_to "<i class=\"fa fa-comment\"></i>".html_safe, "#" %> <%= render 'comments/counter', thing: thing %></span>
           <% end %>
 
-          <%= render 'comments/show_comments', thing: thing %>
+
+
 
           <section class='comments' style= "display: none">
               <%= render 'comments/form', thing: thing %>
@@ -218,19 +226,19 @@ body {
 
           </section><!-- comments -->
 
-        </div><!-- thing -->
+
       </article><!-- call 4 -->
     </article><!-- challenge 4 -->
     </div>
   <% end %>
-</div><!-- container -->
+  </div><!-- container -->
 
 <%= subscribe_to "/games" %>
 
 <script>
 $(document).ready(function() {
   $(".comments").hide();
-    $("a.show_comments").on("click", function() {
+    $(".show_comments").on("click", function() {
       console.log(this);
       var closestComment = $(this).siblings(".comments")
 
@@ -239,8 +247,6 @@ $(document).ready(function() {
       return false;
     });
   });
-
-
 </script>
 
 

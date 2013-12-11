@@ -1,15 +1,27 @@
 <style type="text/css">
-  h4 {
+  .center {
     text-align: center;
   }
 </style>
 
 <div data-role='content'>
-  <h2><%= image_tag(@team.img_url, width: '35', height: '35') %> <%= @team.name %></h2>
+  <h1 class='center'><%= image_tag(@team.img_url, width: '35', height: '35') %> </h1>
+  <h2 class='center'><%= @team.name %></h2>
   <h4>Games</h4>
     <ul data-role='list-view'>
       <% @team.total_games.each do |game| %>
         <li><%= link_to "#{game.home_team.name} vs #{game.away_team.name}", game_url(game.id) %></li>
       <% end %>
     </ul>
+
+    <h4>Roster</h4>
+    <h5>Head Coach: <%= @team.coach %></h5>
+    <ul data-role='list-view'>
+      <% @team.players.each do |player| %>
+        <li><%= link_to player.name, player_url(player.id) %></li>
+      <% end %>
+    </ul>
+    <h4>Number of fouls commited: <%= @team.fouls.count %></h4>
+    <h4>Number of fouls against: <%= @team.fouled.count %></h4>
+
 </div>

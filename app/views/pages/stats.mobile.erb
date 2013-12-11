@@ -1,21 +1,22 @@
-<div class="container">
+<div class="contnt">
+
   <h1>Stats</h1>
 
-  <ul>
+  <ul data-role='list-view'>
     <h3>Refs Who Made Most Calls</h3>
     <% @refs.each do |ref| %>
       <li><%= link_to ref.name, ref_url(ref.id) %> <%= ref.calls.count %></li>
     <% end %>
   </ul>
 
-  <ul>
+  <ul data-role='list-view'>
     <h3>Players Who Commit Most Fouls/Violations</h3>
     <% @commit_players.each do |player| %>
       <li><%= link_to player.name, player_url(player.id) %> <%= player.fouls.count %></li>
     <% end %>
   </ul>
 
-  <ul>
+  <ul data-role='list-view'>
     <h3>Players Who Get Fouled The Most</h3>
     <% @fouled_players.each do |player| %>
       <li><%= link_to player.name, player_url(player.id) %> <%= player.fouls.count %></li>
@@ -23,8 +24,3 @@
   </ul>
 
 </div>
-
-
-
-
-

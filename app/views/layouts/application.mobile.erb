@@ -19,6 +19,9 @@
       <li><%= link_to "<i class=\"fa fa-home\"></i> Home".html_safe, games_url %></li>
       <li><%= link_to "<i class=\"fa fa-pencil-square-o\"></i> Stats".html_safe, stats_url %></li>
       <li><%= link_to "Teams", teams_url %></li>
+      <% if current_user.present? %>
+        <li><%= link_to "Log Out", sessions_url %></li>
+      <% end %>
     </ul>
   </div><!-- /navbar -->
 </div>

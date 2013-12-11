@@ -6,12 +6,13 @@
   <% if @comment.challenge_id.present? %>
 
     $('.challenge_thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
+    $('.challenge_thing_' + id).find('.comment_count_' + id).replaceWith('<%= j(render 'counter', :thing => @comment.challenge) %>');
 
   <% elsif @comment.call_id.present? %>
 
     $('.call_thing_' + id).find('form').first().append('<%= j(render 'comment', :comment => @comment) %>');
-
+    $('.call_thing_' + id).find('.comment_count_' + id).replaceWith('<%= j(render 'counter', :thing => @comment.call) %>');
   <% end %>
-  $('.call_thing_2').find('.show_comments').replceWith('<%= j(render 'show_comments', :comment => @comment) %>');
+
   $("input#comment_text").val("");
 <% end %>

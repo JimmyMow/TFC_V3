@@ -1,6 +1,8 @@
 class Team < ActiveRecord::Base
   has_many :players
   has_many :games
+  has_many :fouls, through: :players, source: :fouls
+  has_many :fouled, through: :players, source: :fouled
 
   def total_games
     away_games = Game.where(:away_team_id => self.id)

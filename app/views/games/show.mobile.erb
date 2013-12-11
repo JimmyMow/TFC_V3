@@ -3,12 +3,82 @@
     text-align: center;
   }
 
+  .event-container {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 2px solid #999;
+  }
+
+  .content {
+    background: white;
+
+  }
+
+  .disagree {
+    color: #D9534F;
+  }
+
+  .comment {
+    border-bottom: solid 1px gray;
+  }
+
+  .view-comments {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
 </style>
+<div class="content">
+  <fieldset class="ui-grid-b">
+      <div class="ui-block-a title"><%= image_tag(@game.home_team.img_url) %></div>
+      <div class="ui-block-b title"><p>VS.</p></div>
+      <div class="ui-block-c title"><%= image_tag(@game.away_team.img_url) %></div>
+  </fieldset>
 
-<fieldset class="ui-grid-b">
-    <div class="ui-block-a title"><%= image_tag(@game.home_team.img_url) %></div>
-    <div class="ui-block-b title"><p>VS.</p></div>
-    <div class="ui-block-c title"><%= image_tag(@game.away_team.img_url) %></div>
-</fieldset>
+  <div class='calls-challenges'>
+    <% @game.things.each do |thing| %>
+      <% if thing.class.to_s == "Challenge" %>
+        <div class='challenge_thing_<%= thing.id %> event-container title'>
+          <div><%= link_to thing.user.username, user_url(thing.user.id) %> Challenged:</div>
+          <div><%= thing.description %></div>
+
+          <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
+          <% if challenge_ids.include?(thing.id) %>
+
+          <% else %>
+
+          <% end %>
+
+        </div><!-- challenge-thing -->
+      <% elsif thing.class.to_s == "Call" %>
+        <div class='call_thing_<%= thing.id %> event-container title'>
+          <div><%= thing.call_type %></div>
+          <div><%= thing.description %></div>
+
+          <% if current_user.calls.include?(thing) %>
+            <%= render 'call_votes/downvote_mobile' %>
+          <% else %>
+            <%= link_to "I Challenge!", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
+          <% end %>
+
+          <%= render 'call_votes/vote_counter_mobile', call: thing %>
+
+          <div data-role="collapsible" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-theme='a' class='view-comments'>
+             <h3>View all <%= thing.comments.count %> comments</h3>
+              <%= render 'comments/form_mobile', thing: thing %>
+              <% thing.comments.each do |comment| %>
+                <p><%= link_to comment.user.username, user_url(comment.user.id) %> <%= comment.text %></p>
+
+                <p class='comment'><%= time_ago_in_words(comment.created_at) %></p>
+              <% end %>
+          </div>
 
 
+        </div><!-- call-thing -->
+      <% end %>
+    <% end %>
+  </div><!-- calls-challenges -->
+</div><!-- content -->
+
+<%= subscribe_to "/games" %>
