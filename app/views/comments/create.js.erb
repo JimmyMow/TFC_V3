@@ -1,4 +1,4 @@
-<% publish_to 'http://fanschallengetestserver.herokuapp.com/games' do %>
+<% publish_to '/games' do %>
   var id = <%= @comment.call_id || @comment.challenge_id %>
 
   console.log( $('.thing_' + id).find('input#comment_text')[0] )
