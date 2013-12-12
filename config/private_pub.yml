@@ -5,6 +5,6 @@ test:
   server: "http://localhost:9292/faye"
   secret_token: "secret"
 production:
-  server: "http://fanschallengetestserver.herokuapp.com"
+  server: "http://fanschallengetestserver.herokuapp.com/faye"
   secret_token: "147a51e7b3a86f911e58db23da58866878f6646385bf2d151cade533d25de312"
   signature_expiration: 3600 # one hour
