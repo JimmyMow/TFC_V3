@@ -114,7 +114,7 @@ end
 #CREATING PLAYERS FOR EACH TEAM
 wait
 Player.destroy_all
-counter = 122
+counter = 1
 teams.each do |team|
   team_players(team).each do |player|
     p = Player.new
