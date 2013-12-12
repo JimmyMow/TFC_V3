@@ -1,41 +1,72 @@
-<h1><%= @user.username %></h1>
+<style type="text/css">
+  .disagree {
+    color: #D9534F;
+  }
+</style>
 
-<p>
-  <b>First name:</b>
-  <%= @user.first_name %>
-</p>
+<div class="container">
+  <div class="col-xs-12">
+    <div class="col-xs-3">
+      <h1><%= @user.username %></h1>
 
-<p>
-  <b>Last name:</b>
-  <%= @user.last_name %>
-</p>
+      <p>
+        <b>First name:</b>
+        <%= @user.first_name %>
+      </p>
 
-<p>
-  <b>User name:</b>
-  <%= @user.username %>
-</p>
+      <p>
+        <b>Last name:</b>
+        <%= @user.last_name %>
+      </p>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+      <p>
+        <b>User name:</b>
+        <%= @user.username %>
+      </p>
 
-<p>
-  <b>Iq:</b>
-  <%= @user.iq %>
-</p>
+      <p>
+        <b>Email:</b>
+        <%= @user.email %>
+      </p>
 
-<p>
-  <b>Description:</b>
-  <%= @user.description %>
-</p>
+      <p>
+        <b>Bio:</b>
+        <%= @user.description %>
+      </p>
 
-<p>
-  <b>Score:</b>
-  <%= @user.score %>
-</p>
-<% if current_user == @user %>
-  <%= link_to 'Edit Profile', edit_user_url %>
-<% end %>
+      <p>
+        <b>Score:</b>
+        <%= @user.score %>
+      </p>
+      <% if current_user == @user %>
+        <%= link_to 'Edit Profile', edit_user_url %>
+      <% end %>
 
-<%= notice %>
+      <%= notice %>
+    </div><!-- 4 -->
+    <div class="col-xs-8 pull-right">
+      <h2>Recent Activity:</h2>
+      <ul>
+        <% @activity.each do |activity| %>
+          <% if activity.class.to_s == "CallVote" %>
+            <li>
+            <%= link_to @user.username, user_url(@user.id) %> disagreed with <span id='test' class='disagree'><%= activity.call.description %></span> in the <%= link_to "#{activity.call.game.home_team.name} vs #{activity.call.game.away_team.name}", game_url(activity.call.game.id) %> game.
+            </li>
+          <% elsif activity.class.to_s == 'Challenge' %>
+            <li>
+            <%= link_to @user.username, user_url(@user.id) %> challenged "<span class='disagree'><%= activity.description %></span>" in the <%= link_to "#{activity.game.home_team.name} vs #{activity.game.away_team.name}", game_url(activity.game.id) %> game.
+            </li>
+          <% elsif activity.class.to_s == "ChallengeVote" %>
+            <li>
+            <%= link_to @user.username, user_url(@user.id) %> agreed with <%= link_to activity.challenge.user.username, user_url(activity.challenge.user.id) %>: "<span class='disagree'><%= activity.challenge.description %></span>" in the <%= link_to "#{activity.challenge.game.home_team.name} vs #{activity.challenge.game.away_team.name}", game_url(activity.challenge.game.id) %> game.
+            </li>
+            <% else %>
+              <li>
+              <%= link_to @user.username, user_url(@user.id) %> commented "<span class='disagree'><%= activity.text %></span>".
+              </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div><!-- 7 -->
+  </div><!-- 12 -->
+</div><!-- container -->

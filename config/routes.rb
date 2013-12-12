@@ -29,6 +29,7 @@ TFCV3::Application.routes.draw do
   # Random Pages
   get '/home' => 'pages#home', as: 'home'
   get '/stats' => 'pages#stats', as: 'stats'
+  get '/pages' => 'pages#contact', as: 'contact'
   # Routes for the Comment_vote resource:
   # CREATE
   get '/comment_votes/new', controller: 'comment_votes', action: 'new', :as => 'new_comment_vote'

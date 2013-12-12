@@ -2,6 +2,7 @@ class Challenge < ActiveRecord::Base
   has_many :comments
   has_many :comment_votes
   has_many :challenge_votes
+
   belongs_to :game
   belongs_to :user
 

@@ -56,7 +56,7 @@
 
   <div data-role='content'>
       <h2>Today's Games</h2>
-    <% @games.each do |game| %>
+    <% @games.reverse.each do |game| %>
     <div class="game-container">
 
         <div class="top">
@@ -68,7 +68,7 @@
         <div class="bottom">
           <p><i class="fa fa-flag disagree"></i> Challenges: <%= game.challenges.count %></p>
           <%#= link_to "Watch this game", game_url(game.id) %>
-          <a href="/games/1" data-role="button" class='watch-button' data-theme='d'>Watch this game</a>
+          <a href="http://localhost:3000/games/<%= game.id %>" data-role="button" class='watch-button' data-theme='d'>Watch this game</a>
         </div>
 
       </div>

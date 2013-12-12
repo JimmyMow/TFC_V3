@@ -22,6 +22,19 @@
     <% end %>
   </ul>
 
+  <ul>
+    <h3>Teams who foul the most</h3>
+    <% @commit_teams.each do |team| %>
+      <li><%= link_to team.name, team_url(team.id) %> <%= team.fouls.count %></li>
+    <% end %>
+  </ul>
+
+  <ul>
+    <h3>Teams who get fouled the most</h3>
+    <% @fouled_teams.each do |team| %>
+      <li><%= link_to team.name, team_url(team.id) %> <%= team.fouls.count %></li>
+    <% end %>
+  </ul>
 </div>
 
 

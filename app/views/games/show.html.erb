@@ -1,8 +1,39 @@
   <style type="text/css">
+  .gray {
+    /*color: gray;*/
+  }
+
+  .check-updates {
+    text-align: center;
+  }
+
+  .vs {
+    font-size: 125px;
+    color: #adadad;
+    margin-top: 50px;
+
+  }
+
+  .right {
+    border-right: solid 5px #adadad;
+    border-top: solid 5px #adadad;
+    border-bottom: solid 5px #adadad;
+    border-left: solid 5px #adadad;
+  }
+
+  .left {
+    border-left: solid 5px #adadad;
+    border-top: solid 5px #adadad;
+    border-bottom: solid 5px #adadad;
+    border-right: solid 5px #adadad;
+
+  }
+
   .side_by_side {
     display: inline-block;
     margin-right: 15px;
     margin-left: 15px;
+    font-size: 20px;
   }
 
   .like-comment {
@@ -27,7 +58,8 @@
   }
 
   .description {
-    font-size: 25px;
+    font-size: 20px;
+    font-family: "Raleway";
   }
 
   .opponents a {
@@ -68,34 +100,22 @@ body {
 
 }
 
-.left {
-    border-left: solid 5px #f1f1f1;
-    border-top: solid 5px #f1f1f1;
-    border-bottom: solid 5px #f1f1f1;
-}
-
-.logo {
+.left .logo {
   border-radius: 50%;
   position: absolute;
   top: -50px;
   left: -50px;
   padding: 20px;
-  background-color: #999;
+  background-color: #adadad;
 }
 
-.right {
-    border-left: solid 5px #f1f1f1;
-    border-top: solid 5px #f1f1f1;
-    border-bottom: solid 5px #f1f1f1;
-}
-
-.logo {
+.right .logo {
   border-radius: 50%;
   position: absolute;
   top: -50px;
   right: -50px;
   padding: 20px;
-  background-color: #999;
+  background-color: #adadad;
 }
 
 .center .logo {
@@ -106,8 +126,8 @@ body {
 }
 
 .call {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
+  /*font-family: 'Raleway', sans-serif;*/
+  /*font-weight: 700;*/
   font-size: 1.5em;
   color: #55;
 }
@@ -150,6 +170,10 @@ body {
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
 }
+
+.big-logo {
+  margin-top: none;
+}
 </style>
 <% if current_user.username == 'JimmyMow' %>
   <%= link_to "New Call", new_call_url(game_id: @game.id) %>
@@ -159,14 +183,17 @@ body {
   <%= notice %>
 <% end %>
 
-    <div class="row">
-    <div class='col-xs-3'><%= image_tag(@game.home_team.img_url) %> <h3><%= @game.home_team.name %></h3></div>
-    <div class='col-xs-3 col-xs-offset-6'><%= image_tag(@game.away_team.img_url) %> <h3><%= @game.away_team.name %></h3></div>
+    <div class="row big-logo">
+    <div class='col-xs-4'><%= image_tag(@game.home_team.large_img_url, width: '200', height: '200') %></div>
+    <div class="col-xs-4 vs big-logo">VS</div>
+    <div class='col-xs-4 big-logo'><%= image_tag(@game.away_team.large_img_url, width: '200', height: '200') %></div>
     </div>
+
 
   <%= render 'challenges/form', game_id: @game.id %>
 
 <div class='container'>
+  <div class='check-updates'><%= link_to "Check for new updates", game_url(@game.id), :class => 'btn btn-default' %></div>
   <% @game.things.each do |thing| %>
 
   <% if @game.home_team.players.include?(thing.commit_player) %>
@@ -202,13 +229,13 @@ body {
           <% end %>
           <!-- CALL -->
           <% if thing.class.to_s == 'Call' %>
-          <div class="call"><%= thing.call_type %></div>
+          <!-- <div class="call"><%= thing.call_type %></div> -->
           <div class="description"><%= thing.description %></div>
           <div class="side_by_side">
               <% if current_user.calls.include?(thing) %>
                   <div class='flag'><%= render 'call_votes/downvote', call: thing %></div>
               <% else %>
-                  <%= link_to "Challenge!", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
+                  <%= link_to "Challenge", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
               <% end %>
                <%= render 'call_votes/vote_counter', call: thing %>
 
@@ -228,7 +255,7 @@ body {
                    <%= render 'challenge_votes/upvote', challenge: thing %>
                <% else %>
 
-                   <%= link_to "I Agree!", challenge_votes_url(user_id: current_user.id, challenge_id: thing.id, game_id: thing.game_id, vote: true), method: 'post', remote: true, :class => 'agree', :id => "like-challenge-#{thing.id}" %>
+                   <%= link_to "<i class=\"fa fa-thumbs-up\"></i>".html_safe, challenge_votes_url(user_id: current_user.id, challenge_id: thing.id, game_id: thing.game_id, vote: true), method: 'post', remote: true, :id => "like-challenge-#{thing.id}", :class => 'gray' %>
                <% end %>
 
                <%= render 'challenge_votes/vote_counter', challenge: thing %>

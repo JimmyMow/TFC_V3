@@ -3,7 +3,10 @@ class UsersController < ApplicationController
   before_action :protection, only: [:edit, :update, :destroy]
 
   def protection
-    unless current_user == @user
+    # unless current_user.id == @user.id
+    #   redirect_to :back, notice: 'Not allowed.'
+    # end
+    if current_user.id != @user.id
       redirect_to :back, notice: 'Not allowed.'
     end
   end
@@ -14,6 +17,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(:id => params[:id])
+    @activity = @user.activity.sort_by! { |x| x.created_at }.reverse!
   end
 
   def new

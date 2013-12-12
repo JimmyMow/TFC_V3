@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
   def score
     (self.challenges.count * 5) + (self.call_votes.count * 2) + (self.comments.count)
   end
+
+  def activity
+    (self.call_votes) + (self.challenges) + (self.challenge_votes) + (self.comments)
+  end
 end

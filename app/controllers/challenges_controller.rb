@@ -27,7 +27,11 @@ class ChallengesController < ApplicationController
     respond_to do |format|
       if @challenge.save
         format.js
-        format.html { redirect_to game_url(params[:challenge][:game_id]) }
+        if mobile_device?
+          format.mobile { redirect_to game_url(params[:challenge][:game_id]) }
+        else
+          format.html { redirect_to game_url(params[:challenge][:game_id]) }
+        end
       else
         render 'new'
       end
