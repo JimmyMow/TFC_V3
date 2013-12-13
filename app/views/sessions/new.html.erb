@@ -1,4 +1,8 @@
 <style type="text/css">
+  .disagree {
+    color: #D9534F;
+  }
+
   .header-background {
     background-color: rgba(#333, #333, #333, 1);
   }
@@ -41,16 +45,23 @@
   }
 </style>
 
-<div class='header-background'>
-  <h1 class='header'>Change the way you watch sports</h1>
-  <h5 class='header'>Join the community. Claim your challenge flag.</h5>
+<div class='header-background center'>
+  <h2 class='header'><span class='disagree'>The Fan's Challenge.</span> The online home for sports fans.</h2>
+  <!-- <h5 class='header'>Join the community</h5> -->
+    <button class="btn btn-danger btn-lg center" data-toggle="modal" data-target="#myModal">
+    Join The Community
+    </button>
 </div>
 
-<div class="container">
-  <div class="col-xs-4 pull-left sign-up">
-    <h3>Sign Up</h3>
-
-    <%= form_tag users_url, :class => 'form-horizontal', method: 'post' do %>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title center" id="myModalLabel">Sign Up</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag users_url, :class => 'form-horizontal', method: 'post' do %>
     <div class="form-group">
       <%= text_field_tag "email", nil, placeholder: 'Email', :class => 'form-control' %>
     </div>
@@ -67,5 +78,7 @@
       <%= submit_tag "Sign Up", :class => 'btn btn-danger btn-block' %>
      </div>
     <% end %>
-  </div>
-</div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

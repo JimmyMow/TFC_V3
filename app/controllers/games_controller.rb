@@ -2,10 +2,7 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
-    array = User.all
-    array.sort_by! { |x| x.score }
-    array.reverse
-    @top_users = array.limit(5)
+    @top_users = User.all.sort_by! { |x| x.score }.reverse!.slice(0,5)
   end
 
   def show
