@@ -50,7 +50,7 @@
   <div class="col-xs-4 pull-left sign-up">
     <h3>Sign Up</h3>
 
-    <%= form_tag new_user_url, :class => 'form-horizontal', method: 'post' do %>
+    <%= form_tag users_url, :class => 'form-horizontal', method: 'post' do %>
     <div class="form-group">
       <%= text_field_tag "email", nil, placeholder: 'Email', :class => 'form-control' %>
     </div>
