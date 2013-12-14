@@ -14,3 +14,7 @@
 .danger {
   color: #D9534F !important;
 }
+
+.dropdown-menu>li>a:hover {
+  background-color: #D9534F !important;
+}

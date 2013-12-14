@@ -58,7 +58,7 @@
             </li>
           <% elsif activity.class.to_s == "ChallengeVote" %>
             <li>
-            <%= link_to @user.username, user_url(@user.id) %> agreed with <%= link_to activity.challenge.user.username, user_url(activity.challenge.user.id) %>: "<span class='disagree'><%= activity.challenge.description %></span>" in the <%= link_to "#{activity.challenge.game.home_team.name} vs #{activity.challenge.game.away_team.name}", game_url(activity.challenge.game.id) %> game.
+            <%= link_to @user.username, user_url(@user.id) %> liked <%= link_to activity.challenge.user.username, user_url(activity.challenge.user.id) %>'s challenge: "<span class='disagree'><%= activity.challenge.description %></span>" in the <%= link_to "#{activity.challenge.game.home_team.name} vs #{activity.challenge.game.away_team.name}", game_url(activity.challenge.game.id) %> game.
             </li>
             <% else %>
               <li>
