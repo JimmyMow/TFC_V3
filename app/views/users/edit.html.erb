@@ -1,8 +1,7 @@
 <% if current_user.username != @user.username %>
-  <h1>Stop trying to hack some shit dude.</h1>
+  <h1>You do not have permission to acess this page.</h1>
 <% else %>
 <h1><%= @user.username %> Settings</h1>
-
 
 <%= render 'form' %>
 <% end %>

@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: [:edit, :show, :update, :destroy]
-  # before_action :protection, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :show, :update, :destroy]
+  before_action :protection, only: [:edit, :update, :destroy]
 
   def protection
-    # unless current_user.id == @user.id
-    #   redirect_to :back, notice: 'Not allowed.'
-    # end
-    if current_user.id != @user.id
+    unless current_user == @user
       redirect_to :back, notice: 'Not allowed.'
     end
   end
