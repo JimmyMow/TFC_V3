@@ -1,4 +1,9 @@
 <style type="text/css">
+  p {
+    color: white;
+    font-size: 26px;
+  }
+
   .disagree {
     color: #D9534F;
   }
@@ -46,7 +51,9 @@
 </style>
 
 <div class='header-background center'>
-  <h2 class='header'><span class='disagree'>The Fan's Challenge.</span> The online home for sports fans.</h2>
+  <h1 class='header'><span class='disagree'>The Fan's Challenge</span></h1>
+  <p>The online home for sports fans</p>
+
   <!-- <h5 class='header'>Join the community</h5> -->
     <button class="btn btn-danger btn-lg center" data-toggle="modal" data-target="#myModal">
     Join The Community
@@ -58,7 +65,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title center" id="myModalLabel">Sign Up</h4>
+        <h4 class="modal-title center" id="myModalLabel">Claim your challenge flag</h4>
       </div>
       <div class="modal-body">
         <%= form_tag users_url, :class => 'form-horizontal', method: 'post' do %>
