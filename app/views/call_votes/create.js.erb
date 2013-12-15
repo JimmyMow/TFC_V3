@@ -1,4 +1,6 @@
 <% publish_to '/games' do %>
   $('.call-score-<%= @call_vote.call_id %>').replaceWith('<%= j(render 'call_votes/vote_counter', call: @call_vote.call) %>');
-  $('#call-disagree-<%= @call_vote.call_id %>').replaceWith('<%= j(render 'downvote', call: @call_vote.call) %>');
 <% end %>
+
+
+  $('#call-disagree-<%= @call_vote.call_id %>').replaceWith('<%= j(render 'downvote', call: @call_vote.call) %>');

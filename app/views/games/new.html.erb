@@ -1,36 +1,42 @@
-<h1>New Game</h1>
+<% if current_user.username != "JimmyMow"  %>
+  <h1>You do not have permission to access this page.</h1>
+<% else %>
+
+  <h1>New Game</h1>
 
 
-<%= form_tag(games_url, method: 'post') do %>
+  <%= form_tag(games_url, method: 'post') do %>
 
 
-  <div>
-    <%= select_tag 'home_team_id', options_from_collection_for_select(@teams, "id", "name") %>
-  </div>
+    <div>
+      <%= select_tag 'home_team_id', options_from_collection_for_select(@teams, "id", "name") %>
+    </div>
 
-  <div>
-    <%= select_tag 'away_team_id', options_from_collection_for_select(@teams, "id", "name") %>
-  </div>
+    <div>
+      <%= select_tag 'away_team_id', options_from_collection_for_select(@teams, "id", "name") %>
+    </div>
 
-  <div>
-    <%= select_tag 'ref_one_id', options_from_collection_for_select(@refs, "id", "name") %>
-  </div>
+    <div>
+      <%= select_tag 'ref_one_id', options_from_collection_for_select(@refs, "id", "name") %>
+    </div>
 
-  <div>
-    <%= select_tag 'ref_two_id', options_from_collection_for_select(@refs, "id", "name") %>
-  </div>
+    <div>
+      <%= select_tag 'ref_two_id', options_from_collection_for_select(@refs, "id", "name") %>
+    </div>
 
-  <div>
-    <%= select_tag 'ref_three_id', options_from_collection_for_select(@refs, "id", "name") %>
-  </div>
+    <div>
+      <%= select_tag 'ref_three_id', options_from_collection_for_select(@refs, "id", "name") %>
+    </div>
 
-  <div>
-    <%= label_tag :time %><br />
-    <%= datetime_field :game, :time %>
-  </div>
+    <div>
+      <%= label_tag :time %><br />
+      <%= datetime_field :game, :time %>
+    </div>
 
 
-  <div>
-    <%= submit_tag "Create Game" %>
-  </div>
+    <div>
+      <%= submit_tag "Create Game" %>
+    </div>
+  <% end %>
 <% end %>
+
