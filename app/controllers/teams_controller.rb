@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
 
   def index
-    @teams = Team.all
+    @teams = Team.all.order(:name)
 
     @specific_team = Team.find_by_id(cookies[:team_id])
   end
