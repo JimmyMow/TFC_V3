@@ -1,5 +1,5 @@
 <style type="text/css">
-  h1 {
+/*  h1 {
     text-align: center;
   }
 
@@ -28,17 +28,65 @@
     color: red;
     background-color: red;
     border-color: red;
+  }*/
+
+  img {
+    margin-top: 20px;
+  }
+
+  h6 {
+    display: inline;
+    padding-left: 25px;
+  }
+
+  li {
+    list-style: none;
+    /*margin-top: 25px;*/
+  }
+
+  .border {
+    border-right: solid 1px gray;
+  }
+
+  ul {
+    max-height: 750px;
+    overflow: scroll;
+  }
+
+  .padding {
+    padding-top: 40px;
+  }
+
+  .teams {
+    margin-top: 22px;
+    /
   }
 
 </style>
 
-<h1>NBA Teams</h1>
+<!-- <h1>NBA Teams</h1>
 
 <div class='ribbon'>
-  <% @teams.each do |team| %>
-    <%= link_to image_tag(team.img_url, :class => 'logo-container'), team_url(team.id, team_id: team.id) %>
-  <% end %>
+  <%# @teams.each do |team| %>
+    <%#= link_to image_tag(team.img_url, :class => 'logo-container'), team_url(team.id, team_id: team.id) %>
+  <%# end %>
 </div>
-<% if @specific_team.present? %>
-<%= render 'show', team: @specific_team %>
-<% end %>
+<%# if @specific_team.present? %>
+<%#= render 'show', team: @specific_team %>
+<%# end %> -->
+
+<div class="col-xs-12 padding">
+  <div class="col-xs-4 border">
+    <ul class='teams'>
+      <% @teams.each do |team| %>
+        <li><%= link_to image_tag(team.large_img_url, width: '100', height: '100'), team_url(team.id, team_id: team.id) %> <h6><%= link_to team.name, team_url(team.id, team_id: team.id) %></h6></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-xs-7">
+    <% if @specific_team.present? %>
+      <%= render 'show', team: @specific_team %>
+    <% end %>
+  </div>
+</div>

@@ -18,11 +18,15 @@
     color: black;
     margin-top: 5px;
   }
+
+  .user {
+    font-size: 20px;
+  }
 </style>
 
   <div class='comment'>
   <p class='comment-material'>
-    <%= link_to comment.user.username, user_url(comment.user.id) %>
-    <%= comment.text %>
+    <span class='user'><%= link_to comment.user.username, user_url(comment.user.id) %></span>
+     <%= comment.text %>
   <p class='time-ago'><%= time_ago_in_words(comment.created_at) %> ago</p>
 </div>
