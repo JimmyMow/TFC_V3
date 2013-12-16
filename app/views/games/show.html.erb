@@ -218,6 +218,7 @@ body {
         <% elsif thing.class.to_s == 'Call' %>
           <div class="call_thing_<%= thing.id %>">
         <% end %>
+
           <% if @game.home_team.players.include?(thing.commit_player) %>
           <div class="logo">
             <%= image_tag(@game.home_team.img_url, width: '50', height: '50', alt: '') %>
@@ -248,7 +249,8 @@ body {
           <% elsif thing.class.to_s == 'Challenge' %>
              <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
 
-          <div class="call"><%= link_to thing.user.username, user_url(thing.user.id) %> Challenged:</div>
+          <div class="call"><%= link_to thing.user.username, user_url(thing.user.id), :class => 'user' %> Challenged:</div>
+          <!-- HIDDEN-DIV -->
           <div class='description'><%= thing.description %></div>
               <div class='side_by_side'>
                <% if challenge_ids.include?(thing.id) %>
@@ -287,6 +289,7 @@ body {
 
 <script>
 $(document).ready(function() {
+  $(".hidden-user-div").hide();
   $(".comments").hide();
     $(".show_comments").on("click", function() {
       console.log(this);
