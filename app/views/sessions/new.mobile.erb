@@ -1,47 +1,42 @@
 <style type="text/css">
-  .center {
+  body {
+    background: url('/assets/winner.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  p {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  form {
     text-align: center;
   }
+
+  .heading-container {
+
+  }
+
 </style>
 
-  <div class="jumbotron">
-    <div class="container">
-  <% if notice.present? %>
-    <div class="container center">
-    <div class="col-lg-6 center">
-      <div class="alert alert-danger fade in">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4><%= notice %></h4>
-      </div>
+<div class="row heading-container">
+    <div class="large-4 small-offset-1 columns">
+      <h4 class='danger'>The Fan's Challenge</h4>
+      <p>The online home for sports fans</p>
     </div>
-  </div>
-  <% end %>
-    <h2>Sign In</h2>
-    <%= form_tag session_url, method: 'post' do %>
-
-      <%= text_field_tag :username, nil, placeholder: 'Username' %>
-
-      <%= password_field_tag :password, nil, placeholder: 'Password' %>
-
-      <%= submit_tag "Sign In" %>
-
-    <% end %>
-    <h2>Sign Up</h2>
-    <%= form_tag users_url, method: 'post', class: 'form-signup' do %>
-
-      <%= label_tag 'email', 'Email:', class: 'sr-only' %>
-      <%= text_field_tag 'email', nil, class: 'form-control', placeholder: 'Email'  %>
-
-      <%= label_tag 'username', 'Username:', class: 'sr-only' %>
-      <%= text_field_tag 'username', nil, class: 'form-control', placeholder: 'Username'  %>
-
-      <%= label_tag 'password', 'Password:', class: 'sr-only' %>
-      <%= password_field_tag 'password', nil, class: 'form-control', placeholder: 'Password'  %>
-
-      <%= label_tag 'password_confirmation', 'Confirm Password:', class: 'sr-only' %>
-      <%= password_field_tag 'password_confirmation', nil, class: 'form-control', placeholder: 'Confirm Password'  %>
-
-      <%= submit_tag "Sign Up", class: 'btn btn-success btn-block' %>
-    <% end %>
-  </div>
 </div>
+
+<div class="row">
+  <div class="small-5 small-offset-1 columns">
+    <%= link_to "Sign In", "#", :class => 'button expand radius' %>
+  </div>
+  <div class="small-5 small-offset-1 columns">
+    <%= link_to "Sign Up", "#"  , :class => 'button secondary radius expand' %>
+   </div>
+</div>
+
+

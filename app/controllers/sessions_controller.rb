@@ -10,7 +10,7 @@ def create
     session[:user_id] = user.id
     redirect_to games_url, notice: 'Successfully logged in'
   else
-    redirect_to new_session_url, notice: "For some reason we couldn't log you in. Please make sure your username and password match."
+    redirect_to new_session_url, notice: "Incorrect username or password."
   end
 end
 
