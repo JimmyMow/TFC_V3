@@ -15,43 +15,29 @@
 </head>
 <body>
 <% if current_user.present? %>
-  <nav class="top-bar" data-topbar="">
-      <ul class="title-area">
-        <li class="name">
-          <h1><%= link_to "The Fan's Challenge", games_url %></h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href=""><span>Menu</span></a></li>
-      </ul>
-
-
-    <section class="top-bar-section">
-
-        <!-- Right Nav Section -->
-        <ul class="right show-for-large-up">
-          <li><h3><%= link_to "Teams", teams_url %></h3></li>
-          <li class="has-dropdown not-click">
-            <a href="#">Right Button Dropdown</a>
-            <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">Back</a></h5></li>
-              <li><a href="#">First link in dropdown</a></li>
-            </ul>
-          </li>
+  <div class="fixed">
+    <nav class="top-bar" data-topbar="">
+        <ul class="title-area">
+          <li class="name"><h1><%= link_to "The Fan's Challenge", games_url %></h1></li>
+          <li class="toggle-topbar menu-icon"><a href=""><span>Menu</span></a></li>
         </ul>
 
-        <ul class="right hide-for-large-up">
-          <li><h6><%= link_to "Teams", teams_url %></h6></li>
-          <li class="has-dropdown not-click">
-            <a href="#">Right Dropdown</a>
-            <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">Back</a></h5></li>
-              <li><a href="#">First link in dropdown</a></li>
-            </ul>
-          </li>
+   <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li><%= link_to "Teams", teams_url %></li>
+      <li><%= link_to "Stats", stats_url %></li>
+      <li class="has-dropdown">
+        <%= link_to current_user.username, "#" %>
+        <ul class="dropdown">
+          <li><%= link_to "Profile", user_url(current_user.id) %></li>
+          <li><%= link_to "Log Out", sessions_url %></li>
         </ul>
-
-        <!-- Left Nav Section -->
-        <ul class="left show-for-large-up">
-          <li><a href="#">Left Button</a></li>
-        </ul>
-      </section></nav>
+      </li>
+    </ul>
+   </section>
+    </nav>
+  </div>
 <% else %>
 
 <% end %>
