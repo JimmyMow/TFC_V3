@@ -69,7 +69,9 @@
     <div class='event-container'>
       <div class="row <%= @style %>">
         <div class="small-12 columns">
-          <h5 class='title'><%= link_to thing.user.username, user_url(thing.user.id) %> Challenged:</h5>
+          <% if thing.class.to_s == "Challenge" %>
+            <h5 class='title'><%= link_to thing.user.username, user_url(thing.user.id) %> Challenged:</h5>
+          <% end %>
           <p class='description'><%= thing.description %></p>
 
           <% if thing.class.to_s == "Challenge" %>
