@@ -13,16 +13,28 @@
     margin-bottom: 10px;
   }
 
-  form {
+  form, .sign-up {
     text-align: center;
   }
 
-  .heading-container {
+  form {
+    /*margin-top: 10px;*/
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+
+  .log-in {
+    margin-bottom: 0px;
+  }
+
+  .sign-up {
 
   }
 
-</style>
 
+</style>
 <div class="row heading-container">
     <div class="large-4 small-offset-1 columns">
       <h4 class='danger'>The Fan's Challenge</h4>
@@ -30,13 +42,20 @@
     </div>
 </div>
 
-<div class="row">
-  <div class="small-5 small-offset-1 columns">
-    <%= link_to "Sign In", "#", :class => 'button expand radius' %>
+<div class="sign-in-box">
+  <div class="row">
+    <div class="small-8 large-8 columns small-offset-3">
+     <%= form_tag sessions_url, method: 'post' do %>
+      <%= text_field_tag 'username', nil, placeholder: 'Username' %>
+      <%= password_field_tag 'password', nil, placeholder: 'Password' %>
+      <%= submit_tag 'Log In', :class => 'button expand secondary log-in' %>
+     <% end %>
+    </div>
   </div>
-  <div class="small-5 small-offset-1 columns">
-    <%= link_to "Sign Up", "#"  , :class => 'button secondary radius expand' %>
-   </div>
 </div>
 
-
+<div class='row sign-up'>
+  <div class='small-8 large-8 columns small-offset-3'>
+    <%= link_to "Sign Up", new_user_url, :class => 'button radius' %>
+  </div>
+</div>

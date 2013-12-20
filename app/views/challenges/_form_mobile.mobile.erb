@@ -1,25 +1,30 @@
 <style type="text/css">
-.margin-zero-auto {
-    margin: 0 auto;
-  }
+.challenge-form {
+  margin-left: 5px;
+}
+
+form {
+  margin-top: 10px;
+}
+
+.submit {
+
+}
 </style>
 
-
-  <div class="row">
-    <div class="col-lg-12 challenge-form">
-      <div class="input-group margin-zero-auto">
-        <%= form_for(@challenge) do |f| %>
-          <div class="input-group">
-            <%= f.text_field :description, :placeholder => 'Add a challenge...', :class => 'form-control' %>
-            <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.hidden_field :game_id, value: game_id %>
-          <span class='input-group-btn'>
-            <%= f.button 'Challenge!', :class => 'btn btn-danger', type: 'submit' %>
-          </span>
-          </div>
-        <% end %>
-      </div><!-- /input-group -->
-    </div><!-- col-lg-6 -->
-  </div> <!-- row -->
+<div class="row">
+  <%= form_for(@challenge) do |f| %>
+    <div class="small-7 columns challenge-form">
+      <%= f.text_field :description, :placeholder => 'Add a challenge...', :class => 'form-control' %>
+    </div>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :game_id, value: game_id %>
+    <div class="small-2 columns submit">
+      <span class="radius">
+        <%= f.button 'Challenge!', :class => 'button', type: 'submit' %>
+      </span>
+    </div>
+  <% end %>
+</div> <!-- row -->
 
 

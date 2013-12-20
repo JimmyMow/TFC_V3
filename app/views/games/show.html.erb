@@ -40,10 +40,10 @@
     display: inline;
   }
 
-  .container {
-    background: url(/assets/line-background.png) repeat-y 50%;
-    margin-bottom: 150px;
-  }
+    .container {
+      background: url(/assets/line-background.png) repeat-y 50%;
+      margin-bottom: 150px;
+    }
 
   .challenge-form {
     margin-bottom: 15px;
@@ -194,6 +194,7 @@ body {
 
 <div class='container'>
   <div class='check-updates'><%= link_to "Check for new updates", game_url(@game.id), :class => 'btn btn-default' %></div>
+
   <% @game.things.each do |thing| %>
 
   <% if @game.home_team.players.include?(thing.commit_player) %>

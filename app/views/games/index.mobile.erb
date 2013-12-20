@@ -51,6 +51,10 @@
     color: white;
   }
 
+  .voice-your-opinion {
+    margin-bottom: 0px;
+  }
+
 </style>
 
 
@@ -67,12 +71,15 @@
 
         <div class="bottom">
           <p><i class="fa fa-flag disagree"></i> Challenges: <%= game.challenges.count %></p>
-          <%#= link_to "Watch this game", game_url(game.id) %>
-          <a href="http://localhost:3000/games/<%= game.id %>" data-role="button" class='watch-button' data-theme='d'>Watch this game</a>
+          <%= link_to "Voice your opinion", game_url(game.id), :class => 'button radius expand voice-your-opinion' %>
         </div>
 
       </div>
     <% end %>
   </div> <!-- content -->
+
+<script>
+  $(document).foundation();
+</script>
 
 
