@@ -5,6 +5,14 @@
     margin-top: 5px;
   }
 
+  .agree {
+    color: green;
+  }
+
+  .vs {
+    font-size: 30px;
+  }
+
   .vs, .home-logo, .away-logo {
     text-align: center;
   }
@@ -45,9 +53,9 @@
 <% end %>
 
 <div class="row logos">
-  <div class="small-4 columns away-logo"><%= image_tag(@game.away_team.img_url) %></div>
+  <div class="small-4 columns away-logo"><%= image_tag(@game.away_team.large_img_url) %></div>
   <div class="small-4 columns vs">VS</div>
-  <div class="small-4 columns home-logo"><%= image_tag(@game.home_team.img_url) %></div>
+  <div class="small-4 columns home-logo"><%= image_tag(@game.home_team.large_img_url) %></div>
 </div>
 
 <%= render 'challenges/form_mobile', game_id: @game.id %>
@@ -75,12 +83,42 @@
           <p class='description'><%= thing.description %></p>
 
           <% if thing.class.to_s == "Challenge" %>
-            <%  %>
-          <% else %>
+           <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
+            <% if challenge_ids.include?(thing.id) %>
+              <i class="fa fa-thumbs-up agree"></i>
+            <% else %>
+              <%= link_to "<i class=\"fa fa-thumbs-up\"></i>".html_safe, challenge_votes_url(user_id: current_user.id, challenge_id: thing.id, game_id: thing.game_id, vote: true, :format => :mobilejs), method: 'post', remote: true, :id => "like-challenge-#{thing.id}", :class => 'gray' %>
+            <% end %>
+
+          <% elsif thing.class.to_s == "Call" %>
+
+            <% if current_user.calls.include?(thing) %>
+              <i class="fa fa-flag"></i>
+            <% else %>
+              <%= link_to "Challenge", call_votes_url(user_id: current_user.id, call_id: thing.id, game_id: @game.id, vote: false, format: :js), remote: true, method: 'post', :class => 'disagree', :id => "call-disagree-#{thing.id}" %>
+            <% end %>
 
           <% end %>
+          <%= render 'comments/form_mobile', thing: thing %>
         </div>
       </div> <!-- row -->
     </div> <!-- event-container -->
   <% end %> <!-- thing -->
 </div> <!-- container -->
+
+<%= subscribe_to "/games" %>
+
+<script>
+$(document).ready(function() {
+  $(".hidden-user-div").hide();
+  $(".comments").hide();
+    $(".show_comments").on("click", function() {
+      console.log(this);
+      var closestComment = $(this).siblings(".comments")
+
+      closestComment.slideToggle();
+
+      return false;
+    });
+  });
+</script>

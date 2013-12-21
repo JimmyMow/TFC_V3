@@ -250,7 +250,7 @@ body {
           <% elsif thing.class.to_s == 'Challenge' %>
              <% challenge_ids = current_user.challenge_votes.collect { |c| c.challenge_id } %>
 
-          <div class="call"><%= link_to thing.user.username, user_url(thing.user.id), :class => 'user' %> Challenged:</div>
+          <div class="call"><%= link_to thing.user.username, user_url(thing.user.id), :class => 'user' %> challenged:</div>
           <!-- HIDDEN-DIV -->
           <div class='description'><%= thing.description %></div>
               <div class='side_by_side'>

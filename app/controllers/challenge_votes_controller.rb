@@ -19,6 +19,9 @@ class ChallengeVotesController < ApplicationController
 
     respond_to do |format|
       if @challenge_vote.save
+        if mobile_device?
+          format.mobilejs
+        end
         format.js
         format.html { redirect_to challenge_votes_url }
       else

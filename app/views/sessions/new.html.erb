@@ -1,5 +1,5 @@
 <style type="text/css">
-  p {
+  .second-header {
     color: white;
     font-size: 26px;
   }
@@ -9,7 +9,7 @@
   }
 
   .header-background {
-    background-color: rgba(#333, #333, #333, 1);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   form {
@@ -48,44 +48,162 @@
   .center {
     text-align: center;
   }
+
+  .letter {
+    background-color: white;
+  }
+
+  .whole-two {
+    background-color: black;
+  }
+
+  p {
+    font-family: inherit;
+    font-size: 1.5em;
+    line-height: 1.6;
+    margin-bottom: 1.25em;
+    text-rendering: optimizeLegibility;
+    color: #696969;
+    margin-left: 20px;
+  }
+
+  #right-call, .give-us-the-challenge-flag {
+    font-weight: bold;
+/*    font-style: italic;
+*/  }
+
+  h2 {
+    text-align: center;
+    color: white;
+    padding-top: 30px;
+  }
+
+  .bottom-letter {
+    text-align: center;
+    border-top: 1px solid #696969;
+  }
+
+  .date {
+    margin-top: 20px;
+  }
+
+  .letter-button {
+    padding-bottom: 10px;
+  }
+
+  .lear-more-div {
+    margin-top: 375px;
+  }
 </style>
+<div class='whole'>
+  <div class='header-background center'>
+    <h1 class='header'><span class='disagree'>The Fan's Challenge</span></h1>
+    <p class='second-header'>The online home for sports fans</p>
+  </div>
 
-<div class='header-background center'>
-  <h1 class='header'><span class='disagree'>The Fan's Challenge</span></h1>
-  <p>The online home for sports fans</p>
+    <!-- <h5 class='header'>Join the community</h5> -->
+    <div class="center">
+      <button class="btn btn-danger btn-lg center" data-toggle="modal" data-target="#myModal">
+      Join The Community
+      </button>
+    </div>
 
-  <!-- <h5 class='header'>Join the community</h5> -->
-    <button class="btn btn-danger btn-lg center" data-toggle="modal" data-target="#myModal">
-    Join The Community
-    </button>
+   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title center" id="myModalLabel">Claim your voice</h4>
+        </div>
+        <div class="modal-body">
+          <%= form_tag users_url, :class => 'form-horizontal', method: 'post' do %>
+      <div class="form-group">
+        <%= text_field_tag "email", nil, placeholder: 'Email', :class => 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= text_field_tag "username", nil, placeholder: 'Username', :class => 'form-control' %>
+      </div>
+       <div class="form-group">
+        <%= password_field_tag "password", nil, placeholder: 'Password', :class => 'form-control' %>
+       </div>
+       <div class="form-group">
+        <%= password_field_tag "password_confirmation", nil, placeholder: 'Password Confirmation', :class => 'form-control' %>
+       </div>
+       <div class="form-group">
+        <%= submit_tag "Sign Up", :class => 'btn btn-danger btn-block' %>
+       </div>
+      <% end %>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <div class="center lear-more-div">
+    <a href="#bottom" id='learn-more' class='btn btn-lg btn-default'>Learn More</a>
+  </div>
 </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title center" id="myModalLabel">Claim your voice</h4>
-      </div>
-      <div class="modal-body">
-        <%= form_tag users_url, :class => 'form-horizontal', method: 'post' do %>
-    <div class="form-group">
-      <%= text_field_tag "email", nil, placeholder: 'Email', :class => 'form-control' %>
+<div class='whole-two' id='bottom'>
+  <h2>For the fans</h2>
+  <div class="container letter">
+    <p class='date'><%= Date.today.strftime("%B %d, %Y") %></p>
+    <p class='letter-title'>We are fans.</p>
+
+    <p>We bring passion, knowledge, and experience to the games we play, the teams we love, and the issues we debate:  Foul in final seconds when up 3?
+    Start Cutler over McCown?
+    Could LeBron’s Heat beat Jordan’s Bulls?</p>
+
+    <p>We believe fans can find intelligent discussion here and see no urgency to add our voice, but <span id='right-call'>was that the right call?</span></p>
+
+
+
+    <p>Here we find announcers that either don’t know the rules or don’t wish to rock the boat; and network analysts, talk radio shows, and internet blogs favor time wasting screaming matches over informed discussion.</p>
+
+    <p class='give-us-the-challenge-flag disagree'>Give us the challenge flag</p>
+
+    <p>We can do better, can’t we?  Please help us build a credible source for critiquing officiating.  We are die-hard sports fans and - recently - rookie coders and we know it’s only a game...</p>
+    <p>but a lost game can end a season,
+    and a bad call can cost a game. </br>
+
+    Welcome to The Fan's Challenge.</p>
+
+    <div class='center letter-button'>
+      <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+        Grab your challenge flag
+        </button>
     </div>
-    <div class="form-group">
-      <%= text_field_tag "username", nil, placeholder: 'Username', :class => 'form-control' %>
-    </div>
-     <div class="form-group">
-      <%= password_field_tag "password", nil, placeholder: 'Password', :class => 'form-control' %>
-     </div>
-     <div class="form-group">
-      <%= password_field_tag "password_confirmation", nil, placeholder: 'Password Confirmation', :class => 'form-control' %>
-     </div>
-     <div class="form-group">
-      <%= submit_tag "Sign Up", :class => 'btn btn-danger btn-block' %>
-     </div>
-    <% end %>
+      <div class="bottom-letter">
+        <p>Jack Mallers</p>
+        <p>Founder of The Fan's Challenge</p>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+  </div>
+</div>
+
+<script>
+mainHeight = $(window).height();
+console.log(mainHeight);
+
+$(function() {
+  $('.whole').css({"height": mainHeight});
+});
+
+// $(function() {
+//   $('.whole-two').css({"height": mainHeight});
+// });
+
+$(function() {
+  $('#learn-more').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+        || location.hostname == this.hostname) {
+
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
