@@ -24,6 +24,7 @@
       <%= link_to "<i class=\"fa fa-flag\"></i> The Fan's Challenge".html_safe, games_url, :class => 'navbar-brand danger' %>
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
+
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", games_url %></li>
         <li><%= link_to "Teams", teams_url %></li>
@@ -68,6 +69,9 @@
               <%= submit_tag 'Sign In', class: 'btn btn-danger' %>
           <% end %>
         </div><!--/.navbar-collapse -->
+        <% if notice.present? %>
+          <p class='alert disagree'><%= notice %></p>
+         <% end %>
       </ul>
     </div><!-- /.nav-collapse -->
   </div>
