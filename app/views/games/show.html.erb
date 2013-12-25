@@ -175,7 +175,7 @@ body {
   margin-top: none;
 }
 </style>
-<% if current_user.username == 'JimmyMow' %>
+<% if current_user.username == 'JimmyMow' || 'smallers' %>
   <%= link_to "New Call", new_call_url(game_id: @game.id) %>
 <% end %>
 
