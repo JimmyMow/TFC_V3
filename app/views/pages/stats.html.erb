@@ -19,14 +19,14 @@
 
   <ol>
     <h3>Players Who Commit Most Fouls/Violations</h3>
-    <% @players.top_fouls.each do |player| %>
+    <% @players.top_fouled.each do |player| %>
       <li><%= link_to player.name, player_url(player.id) %> <%= player.fouls.count %></li>
     <% end %>
   </ol>
 
   <ol>
     <h3>Players Who Get Fouled The Most</h3>
-    <% @players.top_fouled.each do |player| %>
+    <% @players.top_fouls.each do |player| %>
       <li><%= link_to player.name, player_url(player.id) %> <%= player.fouls.count %></li>
     <% end %>
   </ol>
