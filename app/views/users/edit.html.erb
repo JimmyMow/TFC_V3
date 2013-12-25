@@ -1,7 +1,9 @@
-<% if current_user.username != @user.username %>
-  <h1>You do not have permission to acess this page.</h1>
-<% else %>
-<h1><%= @user.username %> Settings</h1>
+<div class="container">
+  <% if current_user.username != @user.username %>
+    <h1>You do not have permission to access this page.</h1>
+  <% else %>
+  <h1><%= @user.username %> Settings</h1>
 
-<%= render 'form' %>
-<% end %>
+  <%= render 'form' %>
+  <% end %>
+</div>

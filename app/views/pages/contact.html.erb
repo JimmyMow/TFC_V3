@@ -4,21 +4,38 @@
     font-family: "Raleway"
   }
 
+  .contact {
+    background-color: rgba(000, 000, 000, .75);
+  }
+
   h1 {
     font-family: "Times New Roman";
     text-align: center;
     text-decoration: underline;
+    color: white;
   }
 
   p {
     text-align: center;
     font-size: 20px;
+    color: white;
+  }
+
+  body {
+     background: url(http://flooxs.com/wp-content/uploads/2013/12/christmas_background_hd_widescreen_hd_wallpaper.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 </style>
-<div class="container">
+<div class="container contact">
   <h1>Contact <span class='disagree'>The Fan's Challenge</span> Team</h1>
 
-  <p>We appreciate you using our app to improve life for a sports fan. Let us know what we can do better.</p>
+  <p>We appreciate you using our app. Hopefully we gave you a better fan expierence. Please let us know how we can make it better.</p>
+  <p>Contact us at jimmymowschess@gmail.com or click below.</p>
 
   <%= mail_to "jimmymowschess@gmail.com", "E-Mail Us", :class => 'btn btn-danger btn-block' %>
+
+  <h1>Happy Holidays!</h1>
 </div>

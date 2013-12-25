@@ -193,7 +193,7 @@ body {
   <%= render 'challenges/form', game_id: @game.id %>
 
 <div class='container'>
-  <div class='check-updates'><%= link_to "Check for new updates", game_url(@game.id), :class => 'btn btn-default' %></div>
+  <div class='check-updates'><%= link_to "Check for new calls & challenges", game_url(@game.id), :class => 'btn btn-default' %></div>
 
   <% @game.things.each do |thing| %>
 
