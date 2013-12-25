@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#jQuery UI
+gem 'jquery-ui-rails'
 #Private-Pub
 gem "private_pub"
 gem "thin"

@@ -12,35 +12,35 @@
 
   <ol>
     <h3>Refs Who Made Most Calls</h3>
-    <% @refs.each do |ref| %>
+    <% @refs.top.each do |ref| %>
       <li><%= link_to ref.name, ref_url(ref.id) %> <%= ref.calls.count %></li>
     <% end %>
   </ol>
 
   <ol>
     <h3>Players Who Commit Most Fouls/Violations</h3>
-    <% @commit_players.each do |player| %>
+    <% @players.top_fouls.each do |player| %>
       <li><%= link_to player.name, player_url(player.id) %> <%= player.fouls.count %></li>
     <% end %>
   </ol>
 
   <ol>
     <h3>Players Who Get Fouled The Most</h3>
-    <% @fouled_players.each do |player| %>
+    <% @players.top_fouled.each do |player| %>
       <li><%= link_to player.name, player_url(player.id) %> <%= player.fouls.count %></li>
     <% end %>
   </ol>
 
   <ol>
     <h3>Teams who foul the most</h3>
-    <% @commit_teams.each do |team| %>
+    <% @teams.top_fouls.each do |team| %>
       <li><%= link_to team.name, team_url(team.id) %> <%= team.fouls.count %></li>
     <% end %>
   </ol>
 
   <ol>
     <h3>Teams who get fouled the most</h3>
-    <% @fouled_teams.each do |team| %>
+    <% @teams.top_fouled.each do |team| %>
       <li><%= link_to team.name, team_url(team.id) %> <%= team.fouls.count %></li>
     <% end %>
   </ol>
