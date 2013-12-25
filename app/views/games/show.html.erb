@@ -178,10 +178,6 @@ body {
 <% if current_user.username == 'JimmyMow' %>
   <%= link_to "New Call", new_call_url(game_id: @game.id) %>
 <% end %>
-<% if notice.present? %>
-  notice present
-  <%= notice %>
-<% end %>
 
     <div class="row big-logo">
     <div class='col-xs-4'><%= image_tag(@game.home_team.large_img_url, width: '200', height: '200') %></div>
